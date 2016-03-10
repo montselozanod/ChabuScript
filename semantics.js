@@ -29,8 +29,21 @@ var dirProcs = {};
 /* tabla de variables
   nombre
   tipo
+  var current = {
+     'scope': 'local',
+     'id': 'start',
+     'type':'void',
+     'params':[],
+  };
 */
 
+function initializeAgain()
+{
+  currentVarTable = {};
+  curId = "";
+  curType = "";
+  curFuncId = "";
+}
 
 function addProc(name, procedure)
 {

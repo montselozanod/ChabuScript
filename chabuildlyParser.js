@@ -171,6 +171,7 @@ var current = {
 };
 var curType = "";
 var curId = "";
+var curFuncId = "";
 var currentVarTable = {};
 
 function chabuildlyParser (input) {
@@ -539,7 +540,19 @@ chabuildlyParser.prototype.function = function() {
         this.state = 88;
         this.match(chabuildlyParser.T__4);
         this.state = 89;
-        this.match(chabuildlyParser.ID);
+        curFuncId = this.match(chabuildlyParser.ID);
+        if(funcIsUnique(curFuncId))
+        {
+          var proc = {
+              'scope': 'local',
+              'id': curFuncId,
+              'type': curType,
+              'params':[],
+          }
+          addProc(curFuncId, proc);
+        }else{
+          //DUPLICATE_FUNCTION_NAME
+        }
         this.state = 90;
         this.match(chabuildlyParser.T__5);
         this.state = 91;
