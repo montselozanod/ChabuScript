@@ -130,37 +130,49 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 
 var sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ 'null', "'start'", "'{'", "'}'", "'end'", "'function'", 
-                     "':'", "'var'", "';'", "'if'", "'elif'", "'else'", 
-                     "'print'", "'less?'", "'greater?'", "'equals?'", "'different?'", 
-                     "'true'", "'false'", "'params'", "'('", "','", "')'", 
-                     "'number'", "'string'", "'bool'", "'repeat'", "'while'", 
-                     "'+'", "'-'", "'*'", "'/'", "'not'", "'set'", "'='", 
-                     "'return'", "'call'", "'list'", "'id'", "'add'", "'remove'", 
-                     "'and'", "'or'", "'draw'", "'shape'", "'color'", "'point-width'", 
-                     "'line'", "'from'", "'to'", "'polygon'", "'with'", 
-                     "'points'", "'circle'", "'at'", "'radius'", "'rectangle'", 
-                     "'width'", "'height'", "'point'", "'x'", "'y'", "'background'", 
+var literalNames = [ 'null', "'start'", "'{'", "'}'", "'end'", "'function'",
+                     "':'", "'var'", "';'", "'if'", "'elif'", "'else'",
+                     "'print'", "'less?'", "'greater?'", "'equals?'", "'different?'",
+                     "'true'", "'false'", "'params'", "'('", "','", "')'",
+                     "'number'", "'string'", "'bool'", "'repeat'", "'while'",
+                     "'+'", "'-'", "'*'", "'/'", "'not'", "'set'", "'='",
+                     "'return'", "'call'", "'list'", "'id'", "'add'", "'remove'",
+                     "'and'", "'or'", "'draw'", "'shape'", "'color'", "'point-width'",
+                     "'line'", "'from'", "'to'", "'polygon'", "'with'",
+                     "'points'", "'circle'", "'at'", "'radius'", "'rectangle'",
+                     "'width'", "'height'", "'point'", "'x'", "'y'", "'background'",
                      "'random'", "'min:'", "'max:'" ];
 
-var symbolicNames = [ 'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
+var symbolicNames = [ 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
                       'null', 'null', 'null', "ID", "NUMBER", "STRING" ];
 
-var ruleNames =  [ "program", "mainFunction", "function", "vars", "block", 
-                   "statement", "conditional", "write", "expression", "bExpression", 
-                   "params", "type", "loop", "exp", "term", "factor", "assignment", 
-                   "returnStmt", "funcCall", "cte", "list", "listStmt", 
-                   "boolOp", "drawingStmts", "drwShape", "shape", "line", 
-                   "polygon", "circle", "rectangle", "point", "color", "back", 
+var ruleNames =  [ "program", "mainFunction", "function", "vars", "block",
+                   "statement", "conditional", "write", "expression", "bExpression",
+                   "params", "type", "loop", "exp", "term", "factor", "assignment",
+                   "returnStmt", "funcCall", "cte", "list", "listStmt",
+                   "boolOp", "drawingStmts", "drwShape", "shape", "line",
+                   "polygon", "circle", "rectangle", "point", "color", "back",
                    "random" ];
+
+var dirProcs = {};
+var current = {
+   'scope': 'local',
+   'id': 'start',
+   'type':'void',
+   'params':[],
+};
+var curType = "";
+var curId = "";
+var curFuncId = "";
+var currentVarTable = {};
 
 function chabuildlyParser (input) {
 	antlr4.Parser.call(this, input);
@@ -423,6 +435,12 @@ chabuildlyParser.prototype.mainFunction = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 76;
         this.match(chabuildlyParser.T__0);
+        var procedure = {
+          'scope': 'local',
+          'id': 'start',
+          'type': 'void',
+        }
+        addProc('start', procedure);
         this.state = 77;
         this.match(chabuildlyParser.T__1);
         this.state = 81;
@@ -441,6 +459,7 @@ chabuildlyParser.prototype.mainFunction = function() {
         this.match(chabuildlyParser.T__2);
         this.state = 86;
         this.match(chabuildlyParser.T__3);
+        initializeAgain();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -521,7 +540,19 @@ chabuildlyParser.prototype.function = function() {
         this.state = 88;
         this.match(chabuildlyParser.T__4);
         this.state = 89;
-        this.match(chabuildlyParser.ID);
+        curFuncId = this.match(chabuildlyParser.ID);
+        if(funcIsUnique(curFuncId))
+        {
+          var proc = {
+              'scope': 'local',
+              'id': curFuncId,
+              'type': curType,
+              'params':[],
+          }
+          addProc(curFuncId, proc);
+        }else{
+          //DUPLICATE_FUNCTION_NAME
+        }
         this.state = 90;
         this.match(chabuildlyParser.T__5);
         this.state = 91;
@@ -544,6 +575,7 @@ chabuildlyParser.prototype.function = function() {
         this.match(chabuildlyParser.T__2);
         this.state = 101;
         this.match(chabuildlyParser.T__3);
+        initializeAgain();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
@@ -617,7 +649,13 @@ chabuildlyParser.prototype.vars = function() {
             this.state = 104;
             this.type();
             this.state = 105;
-            this.match(chabuildlyParser.ID);
+            curId = this.match(chabuildlyParser.ID);
+            if(varIsUnique(curId))
+            {
+              addLocalVar(curId, curType);
+            }else{
+              //DUPLICATE_VARIABLE_NAME
+            }
             break;
         case chabuildlyParser.T__36:
             this.state = 107;
@@ -1295,7 +1333,13 @@ chabuildlyParser.prototype.params = function() {
             this.state = 170;
             this.type();
             this.state = 171;
-            this.match(chabuildlyParser.ID);
+            curId = this.match(chabuildlyParser.ID);
+            if(varIsUnique(curId))
+            {
+              addLocalVar(curId, curType);
+            }else{
+              //DUPLICATE_VARIABLE_NAME
+            }
             this.state = 178;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
@@ -1305,7 +1349,13 @@ chabuildlyParser.prototype.params = function() {
                 this.state = 173;
                 this.type();
                 this.state = 174;
-                this.match(chabuildlyParser.ID);
+                curId = this.match(chabuildlyParser.ID);
+                if(varIsUnique(curId))
+                {
+                  addLocalVar(curId, curType);
+                }else{
+                  //DUPLICATE_VARIABLE_NAME
+                }
                 this.state = 180;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
@@ -1375,6 +1425,7 @@ chabuildlyParser.prototype.type = function() {
         this._errHandler.recoverInline(this);
         }
         else {
+            curType = this.getCurrentToken().text;
             this.consume();
         }
     } catch (re) {

@@ -11,8 +11,11 @@ var errors{
 var current = {
   'scope': 'global',
   'id': 'start',
+  'type': 'void',
   'params':[],
 };
+
+return this.getToken(chabuildlyParser.ID, 0);
 
 
 //directory of all procedures in a program
@@ -26,13 +29,21 @@ var dirProcs = {};
 /* tabla de variables
   nombre
   tipo
+  var current = {
+     'scope': 'local',
+     'id': 'start',
+     'type':'void',
+     'params':[],
+  };
 */
-//global variables
-var globalVars = {};
 
-//local variables of current scope
-var localVars ={};
-
+function initializeAgain()
+{
+  currentVarTable = {};
+  curId = "";
+  curType = "";
+  curFuncId = "";
+}
 
 function addProc(name, procedure)
 {
@@ -42,24 +53,28 @@ function addProc(name, procedure)
 
 function addLocalVar(id, type)
 {
-  localVars[id] = {
+  currentVarTable[id] = {
     'id': id,
     'type': type,
   }
-}
-
-function addGlobalVar(id, type)
-{
-  globalVars[id] = {
-    'id': id,
-    'type': type,
-  }
+  curId = "";
+  curType = "";
 }
 
 function varIsUnique(id)
 {
   //.hasOwnProperty(id)
-  if(!(id in current[vars]))
+  if(id in currentVarTable)
+    return false;
+  else {
+    return true;
+  }
+}
+
+function funcIsUnique(name)
+{
+  //.hasOwnProperty(id)
+  if(name in dirProcs)
     return false;
   else {
     return true;

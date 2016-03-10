@@ -9,7 +9,7 @@ program :	function* mainFunction;
 
 mainFunction: 'start' '{' vars* block '}' 'end';
 
-function: 'function' ID ':' params '{' vars* block '}' 'end';
+function: 'function' type ID ':' params '{' vars* block '}' 'end';
 
 vars : ('var' type ID | list) ';';
 
