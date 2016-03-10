@@ -130,37 +130,48 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 
 var sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ 'null', "'start'", "'{'", "'}'", "'end'", "'function'", 
-                     "':'", "'var'", "';'", "'if'", "'elif'", "'else'", 
-                     "'print'", "'less?'", "'greater?'", "'equals?'", "'different?'", 
-                     "'true'", "'false'", "'params'", "'('", "','", "')'", 
-                     "'number'", "'string'", "'bool'", "'repeat'", "'while'", 
-                     "'+'", "'-'", "'*'", "'/'", "'not'", "'set'", "'='", 
-                     "'return'", "'call'", "'list'", "'id'", "'add'", "'remove'", 
-                     "'and'", "'or'", "'draw'", "'shape'", "'color'", "'point-width'", 
-                     "'line'", "'from'", "'to'", "'polygon'", "'with'", 
-                     "'points'", "'circle'", "'at'", "'radius'", "'rectangle'", 
-                     "'width'", "'height'", "'point'", "'x'", "'y'", "'background'", 
+var literalNames = [ 'null', "'start'", "'{'", "'}'", "'end'", "'function'",
+                     "':'", "'var'", "';'", "'if'", "'elif'", "'else'",
+                     "'print'", "'less?'", "'greater?'", "'equals?'", "'different?'",
+                     "'true'", "'false'", "'params'", "'('", "','", "')'",
+                     "'number'", "'string'", "'bool'", "'repeat'", "'while'",
+                     "'+'", "'-'", "'*'", "'/'", "'not'", "'set'", "'='",
+                     "'return'", "'call'", "'list'", "'id'", "'add'", "'remove'",
+                     "'and'", "'or'", "'draw'", "'shape'", "'color'", "'point-width'",
+                     "'line'", "'from'", "'to'", "'polygon'", "'with'",
+                     "'points'", "'circle'", "'at'", "'radius'", "'rectangle'",
+                     "'width'", "'height'", "'point'", "'x'", "'y'", "'background'",
                      "'random'", "'min:'", "'max:'" ];
 
-var symbolicNames = [ 'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
-                      'null', 'null', 'null', 'null', 'null', 'null', 'null', 
+var symbolicNames = [ 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
+                      'null', 'null', 'null', 'null', 'null', 'null', 'null',
                       'null', 'null', 'null', "ID", "NUMBER", "STRING" ];
 
-var ruleNames =  [ "program", "mainFunction", "function", "vars", "block", 
-                   "statement", "conditional", "write", "expression", "bExpression", 
-                   "params", "type", "loop", "exp", "term", "factor", "assignment", 
-                   "returnStmt", "funcCall", "cte", "list", "listStmt", 
-                   "boolOp", "drawingStmts", "drwShape", "shape", "line", 
-                   "polygon", "circle", "rectangle", "point", "color", "back", 
+var ruleNames =  [ "program", "mainFunction", "function", "vars", "block",
+                   "statement", "conditional", "write", "expression", "bExpression",
+                   "params", "type", "loop", "exp", "term", "factor", "assignment",
+                   "returnStmt", "funcCall", "cte", "list", "listStmt",
+                   "boolOp", "drawingStmts", "drwShape", "shape", "line",
+                   "polygon", "circle", "rectangle", "point", "color", "back",
                    "random" ];
+
+var dirProcs = {};
+var current = {
+   'scope': 'local',
+   'id': 'start',
+   'type':'void',
+   'params':[],
+};
+var curType = "";
+var curId = "";
+var currentVarTable = {};
 
 function chabuildlyParser (input) {
 	antlr4.Parser.call(this, input);
@@ -424,6 +435,7 @@ chabuildlyParser.prototype.mainFunction = function() {
         this.state = 76;
         this.match(chabuildlyParser.T__0);
         this.state = 77;
+
         this.match(chabuildlyParser.T__1);
         this.state = 81;
         this._errHandler.sync(this);
@@ -617,7 +629,8 @@ chabuildlyParser.prototype.vars = function() {
             this.state = 104;
             this.type();
             this.state = 105;
-            this.match(chabuildlyParser.ID);
+            curId = this.match(chabuildlyParser.ID);
+
             break;
         case chabuildlyParser.T__36:
             this.state = 107;
@@ -1375,6 +1388,7 @@ chabuildlyParser.prototype.type = function() {
         this._errHandler.recoverInline(this);
         }
         else {
+            curType = this.getCurrentToken().text;
             this.consume();
         }
     } catch (re) {
