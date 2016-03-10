@@ -630,7 +630,12 @@ chabuildlyParser.prototype.vars = function() {
             this.type();
             this.state = 105;
             curId = this.match(chabuildlyParser.ID);
-
+            if(varIsUnique(curId))
+            {
+              addLocalVar(curId, curType);
+            }else{
+              //DUPLICATE_VARIABLE_NAME
+            }
             break;
         case chabuildlyParser.T__36:
             this.state = 107;
