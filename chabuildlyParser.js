@@ -575,6 +575,7 @@ chabuildlyParser.prototype.function = function() {
         this.match(chabuildlyParser.T__2);
         this.state = 101;
         this.match(chabuildlyParser.T__3);
+        initializeAgain();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
