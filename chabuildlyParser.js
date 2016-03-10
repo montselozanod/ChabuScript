@@ -434,8 +434,12 @@ chabuildlyParser.prototype.mainFunction = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 76;
         this.match(chabuildlyParser.T__0);
+        var procedure = {
+          'name': "start",
+          'type': 'void',
+        }
+        addProc("start", procedure);
         this.state = 77;
-
         this.match(chabuildlyParser.T__1);
         this.state = 81;
         this._errHandler.sync(this);
@@ -453,6 +457,7 @@ chabuildlyParser.prototype.mainFunction = function() {
         this.match(chabuildlyParser.T__2);
         this.state = 86;
         this.match(chabuildlyParser.T__3);
+        initializeAgain();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;
