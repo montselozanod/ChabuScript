@@ -1332,7 +1332,13 @@ chabuildlyParser.prototype.params = function() {
             this.state = 170;
             this.type();
             this.state = 171;
-            this.match(chabuildlyParser.ID);
+            curId = this.match(chabuildlyParser.ID);
+            if(varIsUnique(curId))
+            {
+              addLocalVar(curId, curType);
+            }else{
+              //DUPLICATE_VARIABLE_NAME
+            }
             this.state = 178;
             this._errHandler.sync(this);
             _la = this._input.LA(1);
@@ -1342,7 +1348,13 @@ chabuildlyParser.prototype.params = function() {
                 this.state = 173;
                 this.type();
                 this.state = 174;
-                this.match(chabuildlyParser.ID);
+                curId = this.match(chabuildlyParser.ID);
+                if(varIsUnique(curId))
+                {
+                  addLocalVar(curId, curType);
+                }else{
+                  //DUPLICATE_VARIABLE_NAME
+                }
                 this.state = 180;
                 this._errHandler.sync(this);
                 _la = this._input.LA(1);
