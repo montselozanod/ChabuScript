@@ -435,10 +435,11 @@ chabuildlyParser.prototype.mainFunction = function() {
         this.state = 76;
         this.match(chabuildlyParser.T__0);
         var procedure = {
-          'name': "start",
+          'scope': 'local',
+          'id': 'start',
           'type': 'void',
         }
-        addProc("start", procedure);
+        addProc('start', procedure);
         this.state = 77;
         this.match(chabuildlyParser.T__1);
         this.state = 81;
