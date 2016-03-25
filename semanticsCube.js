@@ -22,4 +22,4 @@ var Operation: {
 };
 
 // Operations
-var semantic_cube = [];
+var semanticCube = [];
