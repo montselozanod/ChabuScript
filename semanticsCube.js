@@ -18,7 +18,8 @@ var Operation: {
   GRT: 9,
   EQL: 10,
   DIFF: 11,
-  ERR: 12
+  ASSIGN: 12,
+  ERR: 90,
 };
 
 // Operations
@@ -42,13 +43,14 @@ semanticCube[Type.BOOL][Type.BOOL] = [];
 //INITIALIZE SEMANTIC CUBE
 
 semanticCube[Type.NUMBER][Type.NUMBER][Operation.MULT] = Type.NUMBER;
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.DIV] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.SUM] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.MINUS] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.AND] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.OR] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.NOT] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.LESS] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.GRT] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.EQL] = [];
-semanticCube[Type.NUMBER][Type.NUMBER][Operation.DIFF] = [];
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.DIV] =  Type.NUMBER;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.SUM] =  Type.NUMBER;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.MINUS] = Type.NUMBER;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.AND] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.OR] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.NOT] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.LESS] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.GRT] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.EQL] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.DIFF] = Type.BOOL;
+semanticCube[Type.NUMBER][Type.NUMBER][Operation.ASSIGN] = Type.NUMBER;
