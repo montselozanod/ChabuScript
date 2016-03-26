@@ -1,5 +1,10 @@
-//Operation Types
 
+function checkType(type1, type2, op)
+{
+  return semanticCube[type1][type2][op];
+}
+
+//Operation Types
 var Type: {
   NUMBER: 1,
   STRING: 2,
