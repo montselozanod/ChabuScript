@@ -1,7 +1,13 @@
 
 function checkType(type1, type2, op)
 {
-  return semanticCube[type1][type2][op];
+  if(type1 < type2)
+  {
+    return semanticCube[type1][type2][op];
+  }
+  else {
+    return semanticCube[type2][type1][op];
+  }
 }
 
 //Operation Types
@@ -87,19 +93,6 @@ semanticCube[Type.NUMBER][Type.BOOL][Operation.DIFF] = Type.ERR;
 semanticCube[Type.NUMBER][Type.BOOL][Operation.ASSIGN] = Type.ERR;
 
 // STRING OPS
-semanticCube[Type.STRING][Type.NUMBER][Operation.MULT] = Type.NUMBER;
-semanticCube[Type.STRING][Type.NUMBER][Operation.DIV] =  Type.NUMBER;
-semanticCube[Type.STRING][Type.NUMBER][Operation.SUM] =  Type.NUMBER;
-semanticCube[Type.STRING][Type.NUMBER][Operation.MINUS] = Type.NUMBER;
-semanticCube[Type.STRING][Type.NUMBER][Operation.AND] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.OR] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.NOT] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.LESS] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.GRT] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.EQL] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.DIFF] = Type.BOOL;
-semanticCube[Type.STRING][Type.NUMBER][Operation.ASSIGN] = Type.NUMBER;
-
 semanticCube[Type.STRING][Type.STRING][Operation.MULT] = Type.ERR;
 semanticCube[Type.STRING][Type.STRING][Operation.DIV] =  Type.ERR;
 semanticCube[Type.STRING][Type.STRING][Operation.SUM] =  Type.STRING;
@@ -110,7 +103,7 @@ semanticCube[Type.STRING][Type.STRING][Operation.NOT] = Type.ERR;
 semanticCube[Type.STRING][Type.STRING][Operation.LESS] = Type.ERR;
 semanticCube[Type.STRING][Type.STRING][Operation.GRT] = Type.ERR;
 semanticCube[Type.STRING][Type.STRING][Operation.EQL] = Type.BOOL;
-semanticCube[Type.STRING][Type.STRING][Operation.DIFF] = Type.ERR;
+semanticCube[Type.STRING][Type.STRING][Operation.DIFF] = Type.BOOL;
 semanticCube[Type.STRING][Type.STRING][Operation.ASSIGN] = Type.STRING;
 
 semanticCube[Type.STRING][Type.BOOL][Operation.MULT] = Type.ERR;
@@ -127,33 +120,6 @@ semanticCube[Type.STRING][Type.BOOL][Operation.DIFF] = Type.ERR;
 semanticCube[Type.STRING][Type.BOOL][Operation.ASSIGN] = Type.ERR;
 
 // BOOL OPS
-
-semanticCube[Type.BOOL][Type.NUMBER][Operation.MULT] = Type.NUMBER;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.DIV] =  Type.NUMBER;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.SUM] =  Type.NUMBER;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.MINUS] = Type.NUMBER;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.AND] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.OR] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.NOT] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.LESS] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.GRT] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.EQL] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.DIFF] = Type.BOOL;
-semanticCube[Type.BOOL][Type.NUMBER][Operation.ASSIGN] = Type.NUMBER;
-
-semanticCube[Type.BOOL][Type.STRING][Operation.MULT] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.DIV] =  Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.SUM] =  Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.MINUS] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.AND] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.OR] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.NOT] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.LESS] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.GRT] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.EQL] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.DIFF] = Type.ERR;
-semanticCube[Type.BOOL][Type.STRING][Operation.ASSIGN] = Type.ERR;
-
 semanticCube[Type.BOOL][Type.BOOL][Operation.MULT] = Type.ERR;
 semanticCube[Type.BOOL][Type.BOOL][Operation.DIV] =  Type.ERR;
 semanticCube[Type.BOOL][Type.BOOL][Operation.SUM] =  Type.ERR;
