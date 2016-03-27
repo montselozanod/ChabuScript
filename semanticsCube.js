@@ -1,15 +1,3 @@
-
-function checkType(type1, type2, op)
-{
-  if(type1 < type2)
-  {
-    return semanticCube[type1][type2][op];
-  }
-  else {
-    return semanticCube[type2][type1][op];
-  }
-}
-
 //Operation Types
 var Type: {
   NUMBER: 1,
@@ -32,6 +20,17 @@ var Operation: {
   ASSIGN: 12,
   ERR: -1,
 };
+
+function checkType(type1, type2, op)
+{
+  if(type1 < type2)
+  {
+    return semanticCube[type1][type2][op];
+  }
+  else {
+    return semanticCube[type2][type1][op];
+  }
+}
 
 // Operations
 var semanticCube = [];
