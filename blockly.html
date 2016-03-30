@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <script src="blockly/blockly_uncompressed.js"></script>
-    <script src="blockly/generators/javascript.js"></script>
+    <script src="blockly/generators/chabuscript.js"></script>
     <script src="blockly/msg/js/en.js"></script>
-    <script src="javascript.js"></script>
-    <script src="blocks.js"></script>
     <style>
       html, body {
         background-color: #fff;
@@ -25,19 +23,15 @@
         Blockly.inject(document.body, {toolbox: document.getElementById('toolbox')});
         // Let the top-level application know that Blockly is ready.
         window.parent.blockly_loaded(Blockly);
-        var rootBlock = Blockly.Block.obtain(Blockly.mainWorkspace, 'page_settings');
-        rootBlock.initSvg();
-        rootBlock.render();
-        rootBlock.setMovable(false);
-        rootBlock.setDeletable(false);
       }
     </script>
   </head>
   <body onload="init()">
     <xml id="toolbox" style="display: none">
       <category name="Functions">
-        <block type="page_header"></block>
-        <block type="page_text"></block>
+        <block type="main"></block>
+        <block type="function"></block>
+        <block type="func_params"></block>
       </category>
       <category name="Variables">
         <block type="color_red"></block>
