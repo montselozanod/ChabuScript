@@ -8,6 +8,7 @@
 			return window.Blockly = blockly;
 		}
 		window.run_code = function() {
+			code = window.Blockly;
 			code = window.Blockly.Chabuscript.workspaceToCode();
 			console.log(code);
 		}
