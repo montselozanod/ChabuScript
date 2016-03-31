@@ -37,6 +37,20 @@ p
 	margin-left:2%;
 }
 
+#codeOutput
+{
+	height: 600px;
+	width: 50%;
+	display: inline-block;
+	position: relative;
+}
+
+#canvas{
+	background: #FFF;
+	height: 400px;
+	width: 300px;
+}
+
 .header {
     background: linear-gradient(#f1f1f1 , #d3d3d3);
     width: 100%;
