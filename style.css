@@ -2,7 +2,7 @@ body
 {
 	font-family:Arial, sans-serif;
 	font-size: 16pt;
-	background: #000;
+	background: #FFF;
 }
 p
 {
@@ -17,7 +17,7 @@ p
 {
 	border:1px solid #CCC;
 	padding-left:0;
-	height:500px;
+	height:85%;
 }
 #blockly_editor
 {
