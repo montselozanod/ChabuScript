@@ -2,7 +2,7 @@ body
 {
 	font-family:Arial, sans-serif;
 	font-size: 16pt;
-	background: #FFF;
+	background: #9b59b6;
 }
 p
 {
@@ -11,7 +11,7 @@ p
 }
 #header
 {
-	color:#F00;
+	color:#FFF;
 }
 #blockly
 {
