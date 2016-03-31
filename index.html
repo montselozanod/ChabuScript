@@ -15,14 +15,13 @@
 </head>
 <body>
 	<h1 id="header">ChabuScript</h1>
+	<button id="button_run" onclick="run_code()">
+		Run Code Block
+	</button>
 	<div id="blockly_editor">
 		<!-- Blockly will be injected in the iframe below //-->
 		<iframe id="blockly" src="blockly.html" width="100%"></iframe>
 	</div>
-
-	<button id="button_run" onclick="run_code()">
-		Run Code Block
-	</button>
 	<div id="codeOutput">
 		<div id="canvas"></div>
 		<div id="console">
