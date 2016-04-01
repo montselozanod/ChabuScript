@@ -22,9 +22,10 @@
     </style>
     <script>
       function init() {
-        Blockly.inject(document.body, {toolbox: document.getElementById('toolbox')});
+        var workspace = Blockly.inject(document.body, {toolbox: document.getElementById('toolbox')});
+        Blockly.Xml.domToWorkspace(workspace, document.getElementById('toolbox'));
         // Let the top-level application know that Blockly is ready.
-        window.parent.blockly_loaded(Blockly);
+        window.parent.blockly_loaded(Blockly, workspace);
       }
     </script>
   </head>

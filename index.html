@@ -4,12 +4,15 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<!-- function that gets called once Blockly frame loads //-->
 	<script type="text/javascript">
-		window.blockly_loaded = function(blockly) {
+		var workspace;
+		window.blockly_loaded = function(blockly, workspaceC) {
+			workspace = workspaceC;
 			return window.Blockly = blockly;
 		}
 		window.run_code = function() {
+			Blockly.Chabuscript.INFINITE_LOOP_TRAP = null;
 			code = window.Blockly;
-			code = window.Blockly.Chabuscript.workspaceToCode();
+			code = window.Blockly.Chabuscript.workspaceToCode(workspace);
 			console.log(code);
 		}
 	</script>
