@@ -9,7 +9,7 @@ program :	function* mainFunction;
 
 mainFunction: 'start' '{' vars* block '}' 'end';
 
-function: 'function' type ID ':' params '{' vars* block '}' 'end';
+function: 'function' type ID params '{' vars* block '}' 'end';
 
 vars : ('var' type ID | list) ';';
 
@@ -25,7 +25,7 @@ expression :  bExpression (boolOp bExpression)? ;
 
 bExpression :exp ( 'less?' | 'greater?' | 'equals?'| 'different?') exp | 'true' | 'false';
 
-params:'params' ':' '(' ( type ID ( ',' type ID)*)? ')';
+params:'params:' '(' (type ID ';')* ')';
 
 type: 'number'|'string'|'bool';
 
@@ -43,7 +43,7 @@ returnStmt : 'return' expression;
 
 funcCall : 'call' ID '(' (exp ( ',' exp )*)? ')';
 
-cte : ID | NUMBER;
+cte : ID | NUMBER | STRING;
 
 list : 'list' type 'id' '='  '(' (cte)* ')';
 
@@ -53,25 +53,25 @@ boolOp : 'and'| 'or';
 
 drawingStmts : drwShape | back | random;
 
-drwShape : 'draw' 'shape' shape 'color' color 'point-width' cte;
+drwShape : 'draw' 'shape' shape color 'pw:' cte;
 
 shape : line | polygon | circle | rectangle;
 
-line : 'line' 'from' point 'to' point;
+line : 'line' 'p1:' point 'p2:' point;
 
-polygon :'polygon' 'with' 'points' 'list' ID;
+polygon :'polygon points' ID;
 
-circle : 'circle' 'at' point 'radius' cte;
+circle : 'circle' 'at'':' point 'r'':' cte;
 
-rectangle : 'rectangle' 'at' point 'width' cte 'height' cte;
+rectangle : 'rectangle' 'at'':' point 'w'':' cte 'h'':' cte;
 
-point : 'point' 'x' ':' cte 'y' ':' cte;
+point : 'point' 'x:' ':' cte 'y:' ':' cte;
 
-color: '(' cte ',' cte ',' cte ')';
+color: 'color(' cte ',' cte ',' cte ')';
 
-back : 'set' 'background' 'color' color;
+back : 'background' color;
 
-random : 'random' 'number' 'min:' cte 'max:' cte;
+random : 'random' 'num' 'min'':' cte 'max'':' cte;
 
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;

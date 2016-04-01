@@ -1,4 +1,4 @@
-var quadruples = {};
+var quadruples = [];
 var dirProcs = {};
 var varTable = {};
 var quadCont = 0;
