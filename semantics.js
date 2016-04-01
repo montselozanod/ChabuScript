@@ -10,7 +10,6 @@ var current = {
 
 return this.getToken(chabuildlyParser.ID, 0);
 
-
 /*
   nombre,
   tipo,
