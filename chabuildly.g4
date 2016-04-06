@@ -45,9 +45,9 @@ funcCall : 'call' ID '(' (exp ( ',' exp )*)? ')';
 
 cte : ID | NUMBER | STRING;
 
-list : 'list' type 'id' '='  '(' (cte)* ')';
+list : 'list' type 'id' '=' ID '(' (cte)* ')';
 
-listStmt : 'list' 'id' ('add' cte| 'remove' cte);
+listStmt : 'list' ID ('add' cte | 'remove' cte);
 
 boolOp : 'and'| 'or';
 
