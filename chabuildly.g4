@@ -57,17 +57,17 @@ drwShape : 'draw' 'shape' shape color 'pw:' cte;
 
 shape : line | polygon | circle | rectangle;
 
-line : 'line' 'p1:' point 'p2:' point;
+line : 'line' 'p1' ':' point 'p2' ':' point;
 
-polygon :'polygon points' ID;
+polygon :'polygon' 'points' ID;
 
-circle : 'circle' 'at'':' point 'r'':' cte;
+circle : 'circle' 'at' ':' point 'r'':' cte;
 
 rectangle : 'rectangle' 'at'':' point 'w'':' cte 'h'':' cte;
 
-point : 'point' 'x:' ':' cte 'y:' ':' cte;
+point : 'point' 'x' ':' cte 'y' ':' cte;
 
-color: 'color(' cte ',' cte ',' cte ')';
+color: 'color' '(' cte ',' cte ',' cte ')';
 
 back : 'background' color;
 
