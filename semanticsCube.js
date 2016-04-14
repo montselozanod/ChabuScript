@@ -1,11 +1,11 @@
 //Operation Types
-var Type: {
+var Type{
   NUMBER: 1,
   STRING: 2,
   BOOL : 3,
 };
 
-var Operation: {
+var Operation{
   MULT: 1,
   DIV: 2,
   SUM: 3,
