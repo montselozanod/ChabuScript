@@ -10,3 +10,24 @@ var errors{
   'DUPLICATE_VARIABLE_NAME': 'Duplicate variable name {0} found',
   'DUPLICATE_FUNCTION_NAME': 'Duplicate function name {0} found',
 }
+
+function cleanShell()
+{
+  var shell = document.getElementById('output');
+  shell.innerHTML = '';
+}
+
+function printToShell(text, error)
+{
+    var shell = document.getElementById('output');
+    var element = document.createElement('li');
+    element.textContent = text;
+
+    //if message to print is an error
+    if (error)
+    {
+      element.className += " error";
+    }
+
+    shell.appendChild(element);
+}

@@ -40,6 +40,10 @@ p
 	position: relative;
 }
 
+.error{
+	color: red;
+}
+
 #canvas{
 	background: #FFF;
 	height: 400px;
