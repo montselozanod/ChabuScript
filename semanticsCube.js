@@ -18,6 +18,10 @@ var Operation: {
   EQL: 10,
   DIFF: 11,
   ASSIGN: 12,
+  PRINT: 13,
+  RTRN: 14,
+  RND: 15,
+  BCK: 16,
   ERR: -1,
 };
 

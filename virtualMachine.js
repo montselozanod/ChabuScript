@@ -1,11 +1,12 @@
-function writeToMemIndex(element)
+function writeToMemIndex(element, index)
 {
-  
+
 }
 
 function readMemIndex(index)
 {
 
+  return value;
 }
 
 function executeQuadruple(quadruple)
@@ -39,6 +40,8 @@ function executeQuadruple(quadruple)
     case Operation.DIFF:
         break;
     case Operation.ASSIGN:
+        break;
+    case Operation.RND:
         break;
   }
 }
