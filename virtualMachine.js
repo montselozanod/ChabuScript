@@ -1,8 +1,20 @@
+function writeToMemIndex(element)
+{
+  
+}
+
+function readMemIndex(index)
+{
+
+}
+
 function executeQuadruple(quadruple)
 {
   switch(quadruple[0])
   {
     case Operation.MULT:
+      var result = quadruple[1] * quadruple[2];
+
       break;
     case Operation.DIV:
       break;
