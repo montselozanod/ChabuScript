@@ -14,7 +14,7 @@ var errors{
   'UNDECLARED_FUNCTION': 'Undeclared function {0} found',
   'DUPLICATE_VARIABLE_NAME': 'Duplicate variable name {0} found',
   'DUPLICATE_FUNCTION_NAME': 'Duplicate function name {0} found',
-}
+};
 
 function cleanShell()
 {
