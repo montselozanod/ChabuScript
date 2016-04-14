@@ -8,8 +8,6 @@ var current = {
   'params':[],
 };
 
-return this.getToken(chabuildlyParser.ID, 0);
-
 /*
   nombre,
   tipo,
@@ -29,9 +27,7 @@ return this.getToken(chabuildlyParser.ID, 0);
 
 function initializeAgain()
 {
-  currentVarTable = {};
-  curId = "";
-  curType = "";
+  varTable = {};
   curFuncId = "";
 }
 
@@ -43,21 +39,29 @@ function addProc(name, procedure)
 
 function addLocalVar(id, type)
 {
-  currentVarTable[id] = {
+  varTable[id] = {
     'id': id,
     'type': type,
   }
-  curId = "";
-  curType = "";
 }
 
 function varIsUnique(id)
 {
   //.hasOwnProperty(id)
-  if(id in currentVarTable)
+  if(id in varTable)
     return false;
   else {
     return true;
+  }
+}
+
+function varExists(id)
+{
+  if(code in varTable)
+  {
+    return true;
+  }else{
+    return false;
   }
 }
 

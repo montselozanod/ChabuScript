@@ -1,7 +1,12 @@
+var varTable = {};
 var quadruples = [];
 var dirProcs = {};
 var varTable = {};
 var quadCont = 0;
+var constants = {};
+var numVars = 0;
+var stringVars = 0;
+var boolVars = 0;
 var errors{
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
   'PARAMETER_LENGTH_MISMATCH': 'Function {0} expects {1} parameters and is invoked with {2}',
