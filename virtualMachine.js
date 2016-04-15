@@ -7,10 +7,11 @@ var activeMemory = {
   tempNums: [],
   tempBools: [],
 }
-function writeToMemIndex(element, index, type, temp)
+function writeToMemIndex(element, index, temp)
 {
-  var offset = getOffset(type, temp);
-
+  var offsetType = getOffset(index, temp);
+  var offset = offsetType[0];
+  var type = offsetType[1];
   switch(type)
   {
     case Type.NUMBER:
@@ -41,11 +42,41 @@ function writeToMemIndex(element, index, type, temp)
 
 function readMemIndex(index, type,)
 {
-
+  var offsetType = getOffset(index, temp);
+  var offset = offsetType[0];
+  var type = offsetType[1];
+  var value;
+  switch(type)
+  {
+    case Type.NUMBER:
+        if(temp)
+        {
+          value = activeMemory.tempNums[index-offset];
+        }
+        else
+        {
+          value = activeMemory.numbers[index-offset];
+        }
+      break;
+    case Type.BOOL:
+        if(temp)
+        {
+          value = activeMemory.tempBools[index-offset];
+        }
+        else
+        {
+          value = activeMemory.bools[index-offset];
+        }
+      break;
+    case Type.STRING:
+      value = activeMemory.strings[index-offset];
+      break;
+  }
+  
   return value;
 }
 
-function getOffset(type, temp)
+function getOffset(index, temp)
 {
   switch(type)
   {
