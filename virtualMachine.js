@@ -1,12 +1,61 @@
-function writeToMemIndex(element, index)
-{
+var memories = [];
 
+var activeMemory = {
+  numbers: [],
+  bools: [],
+  strings: [],
+  tempNums: [],
+  tempBools: [],
+}
+function writeToMemIndex(element, index, type, temp)
+{
+  var offset = getOffset(type, temp);
+
+  switch(type)
+  {
+    case Type.NUMBER:
+        if(temp)
+        {
+          activeMemory.tempNums[index-offset] = element;
+        }
+        else
+        {
+          activeMemory.numbers[index-offset] = element;
+        }
+      break;
+    case Type.BOOL:
+        if(temp)
+        {
+          activeMemory.tempBools[index-offset] = element;
+        }
+        else
+        {
+          activeMemory.bools[index-offset] = element;
+        }
+      break;
+    case Type.STRING:
+      activeMemory.strings[index-offset] = element;
+      break;
+  }
 }
 
-function readMemIndex(index)
+function readMemIndex(index, type,)
 {
 
   return value;
+}
+
+function getOffset(type, temp)
+{
+  switch(type)
+  {
+    case Type.NUMBER:
+      break;
+    case Type.STRING:
+      break;
+    case Type.BOOL:
+      break;
+  }
 }
 
 function executeQuadruple(quadruple)
