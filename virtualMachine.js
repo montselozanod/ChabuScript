@@ -1,3 +1,12 @@
+var MemOffset = {
+  NUMBER: 1000;
+  STRING: 5000,
+  BOOL: 8000,
+  TMPNUM: 10000,
+  TMPBOOL: 20000,
+  CONST: 45000
+};
+
 var memories = [];
 
 var activeMemory = {
@@ -6,10 +15,11 @@ var activeMemory = {
   strings: [],
   tempNums: [],
   tempBools: [],
-}
+};
+
 function writeToMemIndex(element, index, temp)
 {
-  var offsetType = getOffset(index, temp);
+  var offsetType = getOffset(index);
   var offset = offsetType[0];
   var type = offsetType[1];
   switch(type)
@@ -40,9 +50,9 @@ function writeToMemIndex(element, index, temp)
   }
 }
 
-function readMemIndex(index, type,)
+function readMemIndex(index, temp)
 {
-  var offsetType = getOffset(index, temp);
+  var offsetType = getOffset(index);
   var offset = offsetType[0];
   var type = offsetType[1];
   var value;
@@ -72,21 +82,40 @@ function readMemIndex(index, type,)
       value = activeMemory.strings[index-offset];
       break;
   }
-  
   return value;
 }
 
-function getOffset(index, temp)
+function getOffset(index)
 {
-  switch(type)
+  var offset
+  // number
+  if(index)
   {
-    case Type.NUMBER:
-      break;
-    case Type.STRING:
-      break;
-    case Type.BOOL:
-      break;
+    return [MemOffset.CONST, Type.NUMBER];
+
+  }else if (index)
+  {
+    //bool
+    return [MemOffset.CONST, Type.BOOL];
+  }else if(index){
+    // string
+    return [MemOffset.CONST, Type.STRING];
+  }else if(index)
+  {
+    //number temp
+    return [MemOffset.CONST, Type.NUMBER];
+
+  }else if(index)
+  {
+    //bool temp
+    return [MemOffset.CONST, Type.BOOL];
+
+  }else if(index >= MemOffset.CONST)
+  { //if index is of constant
+    return [MemOffset.CONST, Type.CONST];
   }
+
+
 }
 
 function executeQuadruple(quadruple)
