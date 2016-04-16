@@ -120,10 +120,8 @@ function executeQuadruple(quadruple)
     case Operation.MINUS:
       var result = readMemIndex(quadruple[1]) - readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
-        break;
+      break;
     case Operation.AND:
-        break;
-    case Operation.OR:
         break;
     case Operation.OR:
         break;
@@ -138,7 +136,9 @@ function executeQuadruple(quadruple)
     case Operation.DIFF:
         break;
     case Operation.ASSIGN:
-        break;
+      var result = readMemIndex(quadruple[1]);
+      writeToMemIndex(result, quadruple[3]);
+      break;
     case Operation.RND:
         break;
   }
