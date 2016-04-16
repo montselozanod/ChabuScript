@@ -125,7 +125,7 @@ function executeQuadruple(quadruple)
       var result = readMemIndex(quadruple[1]) && readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.OR:
+    case Operation.OR: // (OR, VAl, VAl, RES)
       var result = readMemIndex(quadruple[1]) || readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       break;
@@ -133,19 +133,19 @@ function executeQuadruple(quadruple)
       var result = !(readMemIndex(quadruple[1]));
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.LESS:
+    case Operation.LESS: // (LESS, VAl, VAl, RES)
     var result = readMemIndex(quadruple[1]) < readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.GRT:
+    case Operation.GRT: // (GRt, VAl, VAl, RES)
       var result = readMemIndex(quadruple[1]) > readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.EQL:
+    case Operation.EQL: // (EQL, VAl, VAl, RES)
       var result = (readMemIndex(quadruple[1]) == readMemIndex(quadruple[2]));
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.DIFF:
+    case Operation.DIFF: // (DIF, VAl, VAl, RES)
       var result = readMemIndex(quadruple[1]) != readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       break;
@@ -161,9 +161,9 @@ function executeQuadruple(quadruple)
       var result = readMemIndex(quadruple[1]);
       printToShell(result, false /* it is not an error*/);
       break;
-    case Operation.COLOR: (COLOR R, G, B)
+    case Operation.COLOR: //(COLOR, R, G, B)
       break;
-    case Operation.BCK:
+    case Operation.BCK: //(BCK, COLOR, , )
       var color = readMemIndex(quadruple[1]);
       break;
   }

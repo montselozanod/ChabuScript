@@ -23,6 +23,11 @@ var Operation = {
   RTRN: 14,
   RND: 15,
   BCK: 16,
+  COLOR: 17,
+  LINE: 18,
+  CIRCLE: 19,
+  RECTANGLE: 20,
+  POLYGON: 21,
   ERR: -1,
 };
 
