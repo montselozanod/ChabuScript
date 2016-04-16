@@ -157,6 +157,14 @@ function executeQuadruple(quadruple)
       var result = generateRandom(readMemIndex(quadruple[1]),readMemIndex(quadruple[2]));
       writeToMemIndex(result, quadruple[3]);
       break;
+    case Operation.PRINT: // (PRINT, VALUE, , )
+      var result = readMemIndex(quadruple[1]);
+      printToShell(result, false /* it is not an error*/);
+      break;
+    case Operation.COLOR:
+      break;
+    case Operation.BCK:
+      break;
   }
 }
 
