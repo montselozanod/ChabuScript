@@ -161,9 +161,10 @@ function executeQuadruple(quadruple)
       var result = readMemIndex(quadruple[1]);
       printToShell(result, false /* it is not an error*/);
       break;
-    case Operation.COLOR:
+    case Operation.COLOR: (COLOR R, G, B)
       break;
     case Operation.BCK:
+      var color = readMemIndex(quadruple[1]);
       break;
   }
 }
