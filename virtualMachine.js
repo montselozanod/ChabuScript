@@ -121,25 +121,39 @@ function executeQuadruple(quadruple)
       var result = readMemIndex(quadruple[1]) - readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.AND:
-        break;
+    case Operation.AND: // (AND, VAR1 VAR2 RESULT)
+      var result = readMemIndex(quadruple[1]) && readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
+      break;
     case Operation.OR:
-        break;
-    case Operation.NOT:
-        break;
+      var result = readMemIndex(quadruple[1]) || readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
+      break;
+    case Operation.NOT: // (NOT, VAR, , RESULT)
+      var result = !(readMemIndex(quadruple[1]));
+      writeToMemIndex(result, quadruple[3]);
+      break;
     case Operation.LESS:
-        break;
+    var result = readMemIndex(quadruple[1]) < readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
+      break;
     case Operation.GRT:
-        break;
+      var result = readMemIndex(quadruple[1]) > readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
+      break;
     case Operation.EQL:
-        break;
+      var result = (readMemIndex(quadruple[1]) == readMemIndex(quadruple[2]));
+      writeToMemIndex(result, quadruple[3]);
+      break;
     case Operation.DIFF:
-        break;
-    case Operation.ASSIGN:
+      var result = readMemIndex(quadruple[1]) != readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
+      break;
+    case Operation.ASSIGN: // (= , RESULT ,  , VAR)
       var result = readMemIndex(quadruple[1]);
       writeToMemIndex(result, quadruple[3]);
       break;
-    case Operation.RND:
+    case Operation.RND: // ( RND MIN MAX RESULT)
       var result = generateRandom(readMemIndex(quadruple[1]),readMemIndex(quadruple[2]));
       writeToMemIndex(result, quadruple[3]);
       break;
