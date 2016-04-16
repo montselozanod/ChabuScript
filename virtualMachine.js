@@ -17,32 +17,24 @@ var activeMemory = {
   tempBools: [],
 };
 
-function writeToMemIndex(element, index, temp)
+function writeToMemIndex(element, index)
 {
   var offsetType = getOffset(index);
   var offset = offsetType[0];
   var type = offsetType[1];
-  switch(type)
+  switch(offset)
   {
-    case Type.NUMBER:
-        if(temp)
-        {
-          activeMemory.tempNums[index-offset] = element;
-        }
-        else
-        {
-          activeMemory.numbers[index-offset] = element;
-        }
+    case MemOffset.TMPNUM:
+      activeMemory.tempNums[index-offset] = element;
       break;
-    case Type.BOOL:
-        if(temp)
-        {
-          activeMemory.tempBools[index-offset] = element;
-        }
-        else
-        {
-          activeMemory.bools[index-offset] = element;
-        }
+    case MemOffset.NUMBER:
+      activeMemory.numbers[index-offset] = element;
+      break;
+    case MemOffset.TMPBOOL:
+      activeMemory.tempBools[index-offset] = element;
+      break;
+    case MemOffset.BOOL:
+      activeMemory.bools[index-offset] = element;
       break;
     case Type.STRING:
       activeMemory.strings[index-offset] = element;
@@ -50,33 +42,25 @@ function writeToMemIndex(element, index, temp)
   }
 }
 
-function readMemIndex(index, temp)
+function readMemIndex(index)
 {
   var offsetType = getOffset(index);
   var offset = offsetType[0];
   var type = offsetType[1];
   var value;
-  switch(type)
+  switch(offset)
   {
-    case Type.NUMBER:
-        if(temp)
-        {
-          value = activeMemory.tempNums[index-offset];
-        }
-        else
-        {
-          value = activeMemory.numbers[index-offset];
-        }
+    case MemOffset.TMPNUM:
+      value = activeMemory.tempNums[index-offset];
       break;
-    case Type.BOOL:
-        if(temp)
-        {
-          value = activeMemory.tempBools[index-offset];
-        }
-        else
-        {
-          value = activeMemory.bools[index-offset];
-        }
+    case MemOffset.NUMBER:
+      value = activeMemory.numbers[index-offset];
+      break;
+    case MemOffset.TMPBOOL:
+      value = activeMemory.tempBools[index-offset];
+      break;
+    case MemOffset.BOOL:
+      value = activeMemory.bools[index-offset];
       break;
     case Type.STRING:
       value = activeMemory.strings[index-offset];
@@ -122,7 +106,7 @@ function executeQuadruple(quadruple)
   switch(quadruple[0])
   {
     case Operation.MULT:
-      var result = quadruple[1] * quadruple[2];
+      var result = readMemIndex(quadruple[1]) * readMemIndex(quadruple[2]);
 
       break;
     case Operation.DIV:
