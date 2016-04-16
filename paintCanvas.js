@@ -10,22 +10,22 @@ function setBackground(r, g, b)
 
 }
 
-function drawLine()
+function drawLine(point1, point2)
 {
 
 }
 
-function drawCircle()
+function drawCircle(radius, point)
 {
 
 }
 
-function drawRectangle()
+function drawRectangle(width, height)
 {
 
 }
 
-function drawPolygon()
+function drawPolygon(points)
 {
 
 }
