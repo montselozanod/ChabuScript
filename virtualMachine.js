@@ -168,7 +168,11 @@ function executeQuadruple(quadruple)
   }
 }
 
-function runQuadruples()
+function runQuadruples(quadruples)
 {
-
+  for(var i = 0; i < quadruples.length; i++)
+  {
+    var quad = quadruples[i];
+    executeQuadruple(quad);
+  }
 }
