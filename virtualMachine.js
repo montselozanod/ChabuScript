@@ -107,13 +107,19 @@ function executeQuadruple(quadruple)
   {
     case Operation.MULT:
       var result = readMemIndex(quadruple[1]) * readMemIndex(quadruple[2]);
-
+      writeToMemIndex(result, quadruple[3]);
       break;
     case Operation.DIV:
+      var result = readMemIndex(quadruple[1]) / readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
       break;
     case Operation.SUM:
+      var result = readMemIndex(quadruple[1]) + readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
       break;
     case Operation.MINUS:
+      var result = readMemIndex(quadruple[1]) - readMemIndex(quadruple[2]);
+      writeToMemIndex(result, quadruple[3]);
         break;
     case Operation.AND:
         break;
