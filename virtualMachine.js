@@ -87,35 +87,34 @@ function readMemIndex(index, temp)
 
 function getOffset(index)
 {
-  var offset
   // number
-  if(index)
+  if(index >=  MemOffset.NUMBER && index < MemOffset.BOOL)
   {
-    return [MemOffset.CONST, Type.NUMBER];
+    return [MemOffset.NUMBER, Type.NUMBER];
 
-  }else if (index)
+  }else if (index >=  MemOffset.BOOL && index < MemOffset.STRING)
   {
     //bool
-    return [MemOffset.CONST, Type.BOOL];
-  }else if(index){
+    return [MemOffset.BOOL, Type.BOOL];
+  }else if(index >=  MemOffset.STRING && index < MemOffset.TMPNUM){
     // string
-    return [MemOffset.CONST, Type.STRING];
-  }else if(index)
+    return [MemOffset.STRING, Type.STRING];
+  }else if(index >=  MemOffset.TMPNUM && index < MemOffset.TMPBOOL)
   {
     //number temp
-    return [MemOffset.CONST, Type.NUMBER];
+    return [MemOffset.TMPNUM, Type.NUMBER];
 
-  }else if(index)
+  }else if(index >=  MemOffset.TMPBOOL && index < MemOffset.CONST)
   {
     //bool temp
-    return [MemOffset.CONST, Type.BOOL];
+    return [MemOffset.TMPBOOL, Type.BOOL];
 
   }else if(index >= MemOffset.CONST)
   { //if index is of constant
     return [MemOffset.CONST, Type.CONST];
+  }else{
+    console.log("address index " + index + "does not exist.");
   }
-
-
 }
 
 function executeQuadruple(quadruple)
