@@ -140,7 +140,9 @@ function executeQuadruple(quadruple)
       writeToMemIndex(result, quadruple[3]);
       break;
     case Operation.RND:
-        break;
+      var result = generateRandom(readMemIndex(quadruple[1]),readMemIndex(quadruple[2]));
+      writeToMemIndex(result, quadruple[3]);
+      break;
   }
 }
 
