@@ -23,6 +23,9 @@ var Operation = {
   RTRN: 14,
   RND: 15,
   BCK: 16,
+  GOTOF: 17,
+  GOTOT: 18,
+  GOTO: 19,
   ERR: -1,
 };
 
