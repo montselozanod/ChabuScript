@@ -7,6 +7,13 @@ var constants = {};
 var numVars = 0;
 var stringVars = 0;
 var boolVars = 0;
+var numberMem = 1000;
+var stringMem = 5000;
+var boolMem = 8000;
+var tmpNumMem = 10000;
+var tmpBoolMem = 20000;
+var constMem = 45000;
+
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
   'PARAMETER_LENGTH_MISMATCH': 'Function {0} expects {1} parameters and is invoked with {2}',
