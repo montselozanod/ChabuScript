@@ -1,11 +1,12 @@
 var canvas = document.getElementById('canvas');
+var paintColor = "";
 
 function cleanCanvas()
 {
 
 }
 
-function setBackground(r, g, b)
+function setBackground()
 {
 
 }
