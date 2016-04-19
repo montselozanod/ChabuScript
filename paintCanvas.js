@@ -1,5 +1,11 @@
 var canvas = document.getElementById('canvas');
 var paintColor = "";
+var paper; //canvas to paint
+function initCanvas()
+{
+  paper = Raphael("canvas", 500, 500);
+
+}
 
 function cleanCanvas()
 {
