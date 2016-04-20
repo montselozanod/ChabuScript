@@ -2,6 +2,7 @@ var varTable = {}; //variable table
 // var name : [type, address]
 var quadruples = []; // all quadruples [op, opIzq, opDer, result]
 var dirProcs = {}; //process address directory
+// funcName : [type, quadInicio, params, vars, numVars]
 var quadCont = 0;
 var constants = {}; // constants with there memory address
 var numVars = 0;

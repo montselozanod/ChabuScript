@@ -3,7 +3,8 @@ var Type = {
   NUMBER: 1,
   STRING: 2,
   BOOL : 3,
-  CONST : 4
+  CONST : 4,
+  VOID : 5
 };
 
 var Operation = {
