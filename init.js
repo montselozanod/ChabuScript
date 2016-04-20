@@ -1,19 +1,18 @@
-var varTable = {};
+var varTable = {}; //variable table
 // var name : [type, address]
-var quadruples = [];
-var dirProcs = {};
-var varTable = {};
+var quadruples = []; // all quadruples [op, opIzq, opDer, result]
+var dirProcs = {}; //process address directory
 var quadCont = 0;
-var constants = {};
+var constants = {}; // constants with there memory address
 var numVars = 0;
 var stringVars = 0;
 var boolVars = 0;
-var numberMem = 1000;
-var stringMem = 5000;
-var boolMem = 8000;
-var tmpNumMem = 10000;
-var tmpBoolMem = 20000;
-var constMem = 45000;
+var numberMem; // start memory address for numbers
+var stringMem; // start memory address for strings
+var boolMem; // start memory address for bools
+var tmpNumMem; // start memory address for tmp numbers
+var tmpBoolMem; // start memory address for tmp bools
+var constMem; // start memory address for constants
 
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
@@ -26,10 +25,29 @@ var errors = {
 
 function startRun()
 {
+  initCompSyntaxTools();
+  initMemVars();
   cleanShell();
   initializeAgain();
   initCanvas();
   cleanCanvas();
+}
+
+function initCompSyntaxTools()
+{
+  quadruples = [];
+  dirProcs = {};
+}
+
+function initMemVars()
+{
+  numberMem = 1000;
+  stringMem = 5000;
+  boolMem = 8000;
+  tmpNumMem = 10000;
+  tmpBoolMem = 20000;
+  constMem = 45000;
+  constants = {};
 }
 
 function cleanShell()
