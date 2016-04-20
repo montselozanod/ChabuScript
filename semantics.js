@@ -65,3 +65,16 @@ function funcIsUnique(name)
     return true;
   }
 }
+
+function addConstant(cons)
+{
+  if(cons in constants )
+  {
+    return constants[cons];
+  }else{
+    var address = constMem++;
+    constants[address] = cons;
+    constants[cons] = address;
+    return address;
+  }
+}

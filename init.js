@@ -82,8 +82,3 @@ if (!String.format) {
     });
   };
 }
-
-// function to get the key if we have a value
-function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
-}
