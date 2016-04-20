@@ -21,10 +21,12 @@ p
 	padding-left:0;
 	height:90%;
 }
-#blockly_editor
+#blocklyDiv
 {
 	width:49%;
 	float:left;
+	overflow: hidden;
+	margin: 0;
 }
 
 #button_run

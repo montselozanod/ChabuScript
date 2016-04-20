@@ -2,15 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <script src="blockly/blockly_compressed.js"></script>
-    <script src="blockly/blocks_compressed.js"></script>
-    <script src="blockly/chabuscript_compressed.js"></script>
-    <script src="blockly/msg/js/en.js"></script>
     <script src="init.js"></script>
     <script src="semantics.js"></script>
     <script src="semanticsCube.js"></script>
     <script src="paintCanvas.js"></script>
     <script src="virtualMachine.js"></script>
+    <script src="blockly/blockly_compressed.js"></script>
+    <script src="blockly/blocks_compressed.js"></script>
+    <script src="blockly/chabuscript_compressed.js"></script>
+    <script src="blockly/msg/js/en.js"></script>
     <style>
       html, body {
         background-color: #fff;
@@ -30,6 +30,14 @@
         Blockly.Xml.domToWorkspace(workspace, document.getElementById('toolbox'));
         // Let the top-level application know that Blockly is ready.
         window.parent.blockly_loaded(Blockly, workspace);
+      }
+
+      function run_code(){
+        startRun();
+        Blockly.Chabuscript.INFINITE_LOOP_TRAP = null;
+        code = window.Blockly;
+        code = window.Blockly.Chabuscript.workspaceToCode(workspace);
+        console.log(code);
       }
     </script>
   </head>
@@ -83,5 +91,8 @@
         <block type="color"></block>
       </category>
     </xml>
+    <button id="button_run" onclick="run_code()">
+      Run Code
+    </button>
   </body>
 </html>
