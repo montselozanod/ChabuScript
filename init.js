@@ -62,7 +62,6 @@ function printToShell(text, error)
     var element = document.createElement('li');
     element.textContent = text;
 
-    //if message to print is an error
     if (error)
     {
       element.className += " error";
@@ -71,6 +70,7 @@ function printToShell(text, error)
     shell.appendChild(element);
 }
 
+// Function to print with format messages in the shell
 if (!String.format) {
   String.format = function(format) {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -81,4 +81,9 @@ if (!String.format) {
       ;
     });
   };
+}
+
+// function to get the key if we have a value
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
 }
