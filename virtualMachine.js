@@ -171,6 +171,8 @@ function executeQuadruple(quadruple)
       var color = readMemIndex(quadruple[1]);
       setBackground();
       break;
+    case Operation.RTRN: // [RTRN, var, , ]
+      break;
   }
 }
 

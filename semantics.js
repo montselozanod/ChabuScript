@@ -25,10 +25,11 @@ function initializeAgain()
     varTable = {};
 }
 
-function addProc(name, procedure)
+//numVars = [numS, tmpNums, strings, booleans, tmpBools ]
+function addProc(name, type, quadInit, params, numVars)
 {
   console.log("add " + name + " to procs directory.");
-  dirProcs[name] = procedure;
+  dirProcs[name] = [type, quadInit, params, numVars];
 }
 
 function addLocalVar(id, type, address)
@@ -77,4 +78,9 @@ function addConstant(cons)
     constants[cons] = address;
     return address;
   }
+}
+
+function countNumVars(params)
+{
+  return numVars;
 }
