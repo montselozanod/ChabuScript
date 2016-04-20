@@ -14,6 +14,7 @@ var boolMem; // start memory address for bools
 var tmpNumMem; // start memory address for tmp numbers
 var tmpBoolMem; // start memory address for tmp bools
 var constMem; // start memory address for constants
+var paramNumber = 0;
 
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
@@ -42,6 +43,7 @@ function initCompSyntaxTools()
 
 function initMemVars()
 {
+  paramNumber = 0;
   numberMem = 1000;
   stringMem = 5000;
   boolMem = 8000;

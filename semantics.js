@@ -79,8 +79,3 @@ function addConstant(cons)
     return address;
   }
 }
-
-function countNumVars(params)
-{
-  return numVars;
-}

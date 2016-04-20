@@ -4,10 +4,12 @@ var Type = {
   STRING: 2,
   BOOL : 3,
   CONST : 4,
-  VOID : 5
+  VOID : 5,
+  MAIN: 6
 };
 
 var Operation = {
+  // BASIC OPS
   MULT: 1,
   DIV: 2,
   SUM: 3,
@@ -21,17 +23,25 @@ var Operation = {
   DIFF: 11,
   ASSIGN: 12,
   PRINT: 13,
-  RTRN: 14,
-  RND: 15,
-  BCK: 16,
-  GOTOF: 17,
-  GOTOT: 18,
-  GOTO: 19,
-  COLOR: 20,
-  LINE: 21,
-  CIRCLE: 22,
-  RECTANGLE: 23,
-  POLYGON: 24,
+  //FUNCTION AND MODULE CONTROL
+  RET: 14,
+  END: 15,
+  RTRN: 16,
+  RND: 17,
+  BCK: 18,
+  GOTOF: 19,
+  GOTOT: 20,
+  GOTO: 21,
+  ERA: 22,
+  GOSUB: 23,
+  PARAM: 24,
+  // DRAWING
+  COLOR: 25,
+  LINE: 26,
+  CIRCLE: 27,
+  RECTANGLE: 28,
+  POLYGON: 29,
+
   ERR: -1,
 };
 
