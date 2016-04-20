@@ -1,12 +1,7 @@
 
 
 //current function
-var current = {
-  'scope': 'global',
-  'id': 'start',
-  'type': 'void',
-  'params':[],
-};
+
 
 /*
   nombre,
@@ -27,8 +22,7 @@ var current = {
 
 function initializeAgain()
 {
-  varTable = {};
-  curFuncId = "";
+    varTable = {};
 }
 
 function addProc(name, procedure)
@@ -37,12 +31,9 @@ function addProc(name, procedure)
   dirProcs[name] = procedure;
 }
 
-function addLocalVar(id, type)
+function addLocalVar(id, type, address)
 {
-  varTable[id] = {
-    'id': id,
-    'type': type,
-  }
+  varTable[id] = [type, address];
 }
 
 function varIsUnique(id)

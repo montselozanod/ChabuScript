@@ -1,5 +1,5 @@
 var MemOffset = {
-  NUMBER: 1000;
+  NUMBER: 1000,
   STRING: 5000,
   BOOL: 8000,
   TMPNUM: 10000,
@@ -162,9 +162,14 @@ function executeQuadruple(quadruple)
       printToShell(result, false /* it is not an error*/);
       break;
     case Operation.COLOR: //(COLOR, R, G, B)
+      var red = readMemIndex(quadruple[1]);
+      var green = readMemIndex(quadruple[2]);
+      var blue = readMemIndex(quadruple[3]);
+
       break;
     case Operation.BCK: //(BCK, COLOR, , )
       var color = readMemIndex(quadruple[1]);
+      setBackground();
       break;
   }
 }
