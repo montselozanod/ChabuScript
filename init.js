@@ -24,6 +24,14 @@ var errors = {
   'DUPLICATE_FUNCTION_NAME': 'Duplicate function name {0} found',
 };
 
+function startRun()
+{
+  cleanShell();
+  initializeAgain();
+  initCanvas();
+  cleanCanvas();
+}
+
 function cleanShell()
 {
   var shell = document.getElementById('output');

@@ -11,6 +11,7 @@
 			return window.Blockly = blockly;
 		}
 		window.run_code = function() {
+			startRun();
 			Blockly.Chabuscript.INFINITE_LOOP_TRAP = null;
 			code = window.Blockly;
 			code = window.Blockly.Chabuscript.workspaceToCode(workspace);
