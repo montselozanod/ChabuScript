@@ -1,24 +1,7 @@
 
-
-//current function
-
-
-/*
-  nombre,
-  tipo,
-  variable = referencia a la tabla de variables del scope
-*/
-
-/* tabla de variables
-  nombre
-  tipo
-  var current = {
-     'scope': 'local',
-     'id': 'start',
-     'type':'void',
-     'params':[],
-  };
-*/
+var regexNumber;
+var regexString;
+var regexBoolean;
 
 function initializeAgain()
 {
@@ -30,6 +13,11 @@ function addProc(name, type, quadInit, params, numVars)
 {
   console.log("add " + name + " to procs directory.");
   dirProcs[name] = [type, quadInit, params, numVars];
+}
+
+function getProcParams(name)
+{
+  return dirProcs[name][2];
 }
 
 function addLocalVar(id, type, address)

@@ -15,6 +15,8 @@ var tmpNumMem; // start memory address for tmp numbers
 var tmpBoolMem; // start memory address for tmp bools
 var constMem; // start memory address for constants
 var paramNumber = 0;
+var params = [];
+var currentFuncName = "";
 
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
@@ -43,6 +45,7 @@ function initCompSyntaxTools()
 
 function initMemVars()
 {
+  currentFuncName = "";
   paramNumber = 0;
   numberMem = 1000;
   stringMem = 5000;
@@ -84,4 +87,29 @@ if (!String.format) {
       ;
     });
   };
+}
+
+function checkParamType(varName)
+{
+  var type;
+  if(varName in varTable)
+  {
+    type = varTable[varName][0];
+  }else if(varName in dirProcs)
+  {
+    type = dirProcs[varName][0];
+  }else{
+    // param is a constant... we need to check the type
+    if(regexNumber.match(varName))
+    {
+      type = Type.NUMBER;
+    }else if(regexString.match(varName))
+    {
+      type = Type.STRING;
+    }else if(regexBoolean.match(varName))
+    {
+      type = Type.BOOL;
+    }
+  }
+  return type;
 }
