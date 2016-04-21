@@ -18,7 +18,7 @@ var paramNumber = 0;
 var params = [];
 var currentFuncName = "";
 var pOper = [];
-
+var listElements = 0;
 
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
@@ -49,6 +49,7 @@ function initCompSyntaxTools()
 
 function initMemVars()
 {
+  listElements = 0;
   currentFuncName = "";
   paramNumber = 0;
   numberMem = 1000;
@@ -128,7 +129,8 @@ function checkType(drop_type)
   switch(drop_type)
   {
     case 'number':
-    break;
+
+      break;
     case 'string':
     break;
     case 'boolean':

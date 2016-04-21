@@ -43,7 +43,7 @@ var Operation = {
   POLYGON: 29,
   POINT: 30,
   // Arrays
-  VER: 31 //verificar que index este dentro del rango
+  VER: 31,//verificar que index este dentro del rango
   PUT: 32,
   REMOVE: 33,
 
