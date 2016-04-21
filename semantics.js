@@ -20,9 +20,9 @@ function getProcParams(name)
   return dirProcs[name][2];
 }
 
-function addLocalVar(id, type, address, dimension)
+function addLocalVar(id, type, address, dimension, size)
 {
-  varTable[id] = [type, address, dimension];
+  varTable[id] = [type, address, dimension, size];
 }
 
 function varIsUnique(id)

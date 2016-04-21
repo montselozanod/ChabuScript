@@ -1,5 +1,5 @@
 var varTable = {}; //variable table
-// var name : [type, address, dimension]
+// var name : [type, address, dimension, size]
 var quadruples = []; // all quadruples [op, opIzq, opDer, result]
 var dirProcs = {}; //process address directory
 // funcName : [type, quadInicio, params, numVars]
@@ -17,6 +17,8 @@ var constMem; // start memory address for constants
 var paramNumber = 0;
 var params = [];
 var currentFuncName = "";
+var pOper = [];
+
 
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
@@ -119,4 +121,17 @@ function checkParamType(varName)
     }
   }
   return [type, address];
+}
+
+function checkType(drop_type)
+{
+  switch(drop_type)
+  {
+    case 'number':
+    break;
+    case 'string':
+    break;
+    case 'boolean':
+    break;
+  }
 }

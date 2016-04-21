@@ -41,6 +41,11 @@ var Operation = {
   CIRCLE: 27,
   RECTANGLE: 28,
   POLYGON: 29,
+  POINT: 30,
+  // Arrays
+  VER: 31 //verificar que index este dentro del rango
+  PUT: 32,
+  REMOVE: 33,
 
   ERR: -1,
 };
