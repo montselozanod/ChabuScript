@@ -50,7 +50,7 @@ var Operation = {
   ERR: -1,
 };
 
-function checkType(type1, type2, op)
+function checkOperationType(type1, type2, op)
 {
   if(type1 < type2)
   {
