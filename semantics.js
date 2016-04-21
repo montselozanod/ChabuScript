@@ -55,6 +55,8 @@ function funcIsUnique(name)
   }
 }
 
+//constants[constant] = [address, type]
+//constants[address] = [constant]
 function addConstant(cons, type)
 {
   if(cons in constants )
