@@ -55,15 +55,15 @@ function funcIsUnique(name)
   }
 }
 
-function addConstant(cons)
+function addConstant(cons, type)
 {
   if(cons in constants )
-  {
-    return constants[cons];
+  { //return address
+    return constants[cons][0];
   }else{
     var address = constMem++;
     constants[address] = cons;
-    constants[cons] = address;
+    constants[cons] = [address, type];
     return address;
   }
 }

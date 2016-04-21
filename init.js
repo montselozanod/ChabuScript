@@ -103,15 +103,15 @@ function checkParamType(varName)
     if(regexNumber.match(varName))
     {
       type = Type.NUMBER;
-      address = constMem++;
+      address = addConstant(varName, type);
     }else if(regexString.match(varName))
     {
       type = Type.STRING;
-      address = constMem++;
+      address = addConstant(varName, type);
     }else if(regexBoolean.match(varName))
     {
       type = Type.BOOL;
-      address = constMem ++;
+      aaddress = addConstant(varName, type);
     }else{
       var message = String.format(errors['UNDECLARED_VARIABLE'], varName);
       printToShell(message, true);
