@@ -1,5 +1,5 @@
 var varTable = {}; //variable table
-// var name : [type, address]
+// var name : [type, address, dimension]
 var quadruples = []; // all quadruples [op, opIzq, opDer, result]
 var dirProcs = {}; //process address directory
 // funcName : [type, quadInicio, params, numVars]
