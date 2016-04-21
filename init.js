@@ -91,6 +91,7 @@ if (!String.format) {
 
 function checkParamType(varName)
 {
+  //return [type, address]
   var type;
   if(varName in varTable)
   {

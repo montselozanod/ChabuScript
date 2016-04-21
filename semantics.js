@@ -1,7 +1,7 @@
 
-var regexNumber;
-var regexString;
-var regexBoolean;
+var regexNumber = /^-?\d*(\.\d+)?$/;
+var regexString = /^"[^"]*"$/;
+var regexBoolean = /^(true|false)$/;
 
 function initializeAgain()
 {
