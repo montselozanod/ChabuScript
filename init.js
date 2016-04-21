@@ -41,6 +41,8 @@ function initCompSyntaxTools()
 {
   quadruples = [];
   dirProcs = {};
+  constMem = 45000;
+  constants = {};
 }
 
 function initMemVars()
@@ -52,8 +54,6 @@ function initMemVars()
   boolMem = 8000;
   tmpNumMem = 10000;
   tmpBoolMem = 20000;
-  constMem = 45000;
-  constants = {};
 }
 
 function cleanShell()
