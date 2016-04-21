@@ -93,12 +93,11 @@ function checkParamType(varName)
 {
   //return [type, address]
   var type;
+  var address;
   if(varName in varTable)
   {
     type = varTable[varName][0];
-  }else if(varName in dirProcs)
-  {
-    type = dirProcs[varName][0];
+    address = varTable[varName][1];
   }else{
     // param is a constant... we need to check the type
     if(regexNumber.match(varName))
@@ -112,5 +111,5 @@ function checkParamType(varName)
       type = Type.BOOL;
     }
   }
-  return type;
+  return [type, address];
 }
