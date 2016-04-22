@@ -96,3 +96,24 @@ function validateListAccess(index, text_index, list_name)
     return true;
   }
 }
+
+function checkInputType(input, type)
+{
+  switch(type)
+  {
+    case Type.NUMBER:
+      if(input.match(regexNumber) !=== null)
+        return true;
+      break;
+    case Type.STRING:
+      if(input.match(regexString) !== null)
+        return input;
+      break
+    case Type.BOOL:
+      if(input.match(regexBoolean) !== null)
+        return true;
+      break;
+  }
+
+  return false;
+}

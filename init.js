@@ -28,7 +28,7 @@ var errors = {
   'DUPLICATE_VARIABLE_NAME': 'Duplicate variable name {0} found',
   'DUPLICATE_FUNCTION_NAME': 'Duplicate function name {0} found',
   'INVALID_INDEX': 'Invalid index {0} for list {1}',
-  'INCORRECT_TYPE': 'Incorrect type value {0} for variable {1}',
+  'INCORRECT_TYPE': 'Incorrect type of value {0} for variable {1}',
   'INDEX_OUT_BOUNDS': 'Index {0} out of bounds for list {1}',
   'INVALID_OP': 'Invalid Operation. Variable {0} is not a list',
 };
@@ -169,22 +169,4 @@ function sumAddress(type, sum)
       break;
   }
   return startAddress;
-}
-
-function checkTypeSyntax(type, var)
-{
-  var correct;
-  switch(type)
-  {
-    case Type.NUMBER:
-      break;
-    case Type.STRING:
-      break;
-    case Type.BOOL:
-      break;
-    case default:
-      correct = false;
-      break;
-  }
-  return correct;
 }
