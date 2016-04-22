@@ -69,3 +69,30 @@ function addConstant(cons, type)
     return address;
   }
 }
+
+function validateListAccess(index, text_index, list_name)
+{
+  if(isNan(index))
+  {
+    var message = String.format(errors['INVALID_INDEX'], text_index, list_name);
+    printToShell(message, true); //print error;
+    return false;
+  }else if(varIsUnique(list_name))
+  {
+    var message = String.format(errors['UNDECLARED_VARIABLE'], list_name);
+    printToShell(message, true); //print error;
+    return false;
+  }else if(varTable[list_name][2] != 1)
+  {
+    var message = String.format(errors['INVALID_OP'], list_name);
+    printToShell(message, true); //print error;
+    return false;
+  }else if(varTable[list_name][3] < index || index < 0)
+  {
+    var message = String.format(errors['INDEX_OUT_BOUNDS'], text_index, list_name);
+    printToShell(message, true); //print error;
+    return false;
+  }else{
+    return true;
+  }
+}

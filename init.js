@@ -27,6 +27,10 @@ var errors = {
   'UNDECLARED_FUNCTION': 'Undeclared function {0} found',
   'DUPLICATE_VARIABLE_NAME': 'Duplicate variable name {0} found',
   'DUPLICATE_FUNCTION_NAME': 'Duplicate function name {0} found',
+  'INVALID_INDEX': 'Invalid index {0} for list {1}',
+  'INCORRECT_TYPE': 'Incorrect type value {0} for variable {1}',
+  'INDEX_OUT_BOUNDS': 'Index {0} out of bounds for list {1}',
+  'INVALID_OP': 'Invalid Operation. Variable {0} is not a list',
 };
 
 function startRun()
@@ -124,16 +128,63 @@ function checkParamType(varName)
   return [type, address];
 }
 
-function checkType(drop_type)
+function checkListType(drop_type)
 {
+  var type;
   switch(drop_type)
   {
     case 'number':
-
+      type = Type.NUMBER;
       break;
     case 'string':
-    break;
+      type = Type.STRING;
+      break;
     case 'boolean':
-    break;
+      type = Type.BOOL;
+      break;
   }
+  return type;
+}
+
+function sumAddress(type, sum)
+{
+  var startAddress;
+  switch(type)
+  {
+    case Type.NUMBER:
+      startAddress = numberMem;
+      numberMem += sum;
+      break;
+    case Type.STRING:
+      startAddress = stringMem;
+      stringMem += sum;
+      break;
+    case Type.BOOL:
+      startAddress = boolMem;
+      boolMem += sum;
+      break;
+    case Type.CONST:
+      startAddress = constMem;
+      constMem += sum;
+      break;
+  }
+  return startAddress;
+}
+
+function checkTypeSyntax(type, var)
+{
+  var correct;
+  switch(type)
+  {
+    case Type.NUMBER:
+      break;
+    case Type.STRING:
+      break;
+    case Type.BOOL:
+      break;
+    case default:
+      correct = false;
+      break;
+  }
+  return correct;
 }
