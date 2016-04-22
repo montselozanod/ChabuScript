@@ -46,6 +46,7 @@ var Operation = {
   VER: 31,//verificar que index este dentro del rango
   PUT: 32, // [op, valueAddress, null, indexAddress] => indexAddress points to the address of the value
   REMOVE: 33,
+  INITPUT: 34,
 
   ERR: -1,
 };
