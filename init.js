@@ -107,15 +107,15 @@ function checkParamType(varName)
     address = varTable[varName][1];
   }else{
     // param is a constant... we need to check the type
-    if(regexNumber.match(varName))
+    if(varName.match(regexNumber))
     {
       type = Type.NUMBER;
       address = addConstant(varName, type);
-    }else if(regexString.match(varName))
+    }else if(varName.match(regexString))
     {
       type = Type.STRING;
       address = addConstant(varName, type);
-    }else if(regexBoolean.match(varName))
+    }else if(varName.match(regexBoolean))
     {
       type = Type.BOOL;
       aaddress = addConstant(varName, type);
