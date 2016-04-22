@@ -99,21 +99,26 @@ function validateListAccess(index, text_index, list_name)
 
 function checkInputType(input, type)
 {
+  var correct = false;
+  var value;
   switch(type)
   {
     case Type.NUMBER:
-      if(input.match(regexNumber) !=== null)
-        return true;
+      if(input.match(regexNumber) !== null)
+        value = parseInt(input);
+        correct = true;
       break;
     case Type.STRING:
       if(input.match(regexString) !== null)
-        return input;
+        value = input;
+        correct = true;
       break
     case Type.BOOL:
       if(input.match(regexBoolean) !== null)
-        return true;
+        value = input == 'true';
+        correct = true;
       break;
   }
 
-  return false;
+  return [correct, value];
 }
