@@ -104,19 +104,21 @@ function checkInputType(input, type)
   switch(type)
   {
     case Type.NUMBER:
-      if(input.match(regexNumber) !== null)
-        value = parseInt(input);
-        correct = true;
+      if(input.match(regexNumber))
+        {
+          value = parseInt(input);
+          correct = true;
+        }
       break;
     case Type.STRING:
-      if(input.match(regexString) !== null)
-        value = input;
-        correct = true;
+      if(input.match(regexString))
+        {value = input;
+        correct = true;}
       break
     case Type.BOOL:
-      if(input.match(regexBoolean) !== null)
-        value = input == 'true';
-        correct = true;
+      if(input.match(regexBoolean))
+        {value = input == 'true';
+        correct = true;}
       break;
   }
 
