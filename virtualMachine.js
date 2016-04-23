@@ -17,6 +17,8 @@ var activeMemory = {
   tempBools: [],
 };
 
+var stackColor = [];
+
 function writeToMemIndex(element, index)
 {
   var offsetType = getOffset(index);
