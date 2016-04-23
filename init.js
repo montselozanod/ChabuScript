@@ -33,7 +33,7 @@ var errors = {
   'INCORRECT_TYPE': 'Incorrect type of value {0} for variable {1}',
   'INDEX_OUT_BOUNDS': 'Index {0} out of bounds for list {1}',
   'INVALID_OP': 'Invalid Operation. Variable {0} is not a list',
-  'BOOL_CONDITION': 'Semantic error. Conditional {0} is not a boolean value',
+  'BOOL_CONDITION': 'Semantic error. {0} conditional does not have a boolean value',
 };
 
 function startRun()
