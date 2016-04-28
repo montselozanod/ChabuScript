@@ -35,7 +35,7 @@ var errors = {
   'INCORRECT_TYPE_OP': 'Incorrect type of value {0} for operation {1}',
   'INDEX_OUT_BOUNDS': 'Index {0} out of bounds for list {1}',
   'INVALID_OP': 'Invalid Operation. Variable {0} is not a list',
-  'BOOL_CONDITION': 'Semantic error. Conditional {0} is not a boolean value',
+  'BOOL_CONDITION': 'Semantic error. {0} conditional does not have a boolean value',
   'INCOMPATIBLE': 'Incompatible types for operation {0}',
   'INCOMPATIBLE_TYPE_OP': 'Incompatible types {0} and {1} for operation {2}',
   'SYNTAX_ERROR': 'Syntax error: expecting a {0} block',

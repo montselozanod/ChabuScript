@@ -1,7 +1,8 @@
 
 var regexNumber = /^-?\d*(\.\d+)?$/;
 var regexString = /^"[^"]*"$/;
-var regexBoolean = /^(true|false)$/;
+//var regexBoolean = /^(true|false)$/;
+var regexBoolean = /^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])$/;
 
 function initializeAgain()
 {
