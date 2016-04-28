@@ -1,4 +1,11 @@
 //Operation Types
+var Shape = {
+  POINT: 1,
+  LINE: 2,
+  CIRCLE: 3,
+  RECTANGLE: 4,
+  POLYGON: 5
+}
 var Type = {
   NUMBER: 1,
   STRING: 2,
@@ -42,11 +49,13 @@ var Operation = {
   RECTANGLE: 28,
   POLYGON: 29,
   POINT: 30,
+  PW: 31,
+  DRAW: 32,
   // Arrays
-  VER: 31,//verificar que index este dentro del rango
-  PUT: 32, // [op, valueAddress, null, indexAddress] => indexAddress points to the address of the value
-  REMOVE: 33,
-  INITPUT: 34,
+  VER: 33,//verificar que index este dentro del rango
+  PUT: 34, // [op, valueAddress, null, indexAddress] => indexAddress points to the address of the value
+  REMOVE: 35,
+  INITPUT: 36,
 
   ERR: -1,
 };

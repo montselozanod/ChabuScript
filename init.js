@@ -21,6 +21,7 @@ var pOper = [];
 var listElements = 0;
 var pSaltos = [];
 var pilaO = [];
+var pOper = [];
 
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
@@ -31,9 +32,13 @@ var errors = {
   'DUPLICATE_FUNCTION_NAME': 'Duplicate function name {0} found',
   'INVALID_INDEX': 'Invalid index {0} for list {1}',
   'INCORRECT_TYPE': 'Incorrect type of value {0} for variable {1}',
+  'INCORRECT_TYPE_OP': 'Incorrect type of value {0} for operation {1}',
   'INDEX_OUT_BOUNDS': 'Index {0} out of bounds for list {1}',
   'INVALID_OP': 'Invalid Operation. Variable {0} is not a list',
   'BOOL_CONDITION': 'Semantic error. Conditional {0} is not a boolean value',
+  'INCOMPATIBLE': 'Incompatible types for operation {0}',
+  'INCOMPATIBLE_TYPE_OP': 'Incompatible types {0} and {1} for operation {2}',
+  'SYNTAX_ERROR': 'Syntax error: expecting a {0} block',
 };
 
 function startRun()
@@ -106,8 +111,8 @@ function checkParamType(varName)
   var address;
   if(varName in varTable)
   {
-    type = varTable[varName][0];
-    address = varTable[varName][1];
+    type = varTable[varName][TableVarAccess.TYPE];
+    address = varTable[varName][TableVarAccess.ADDRESS];
   }else{
     // param is a constant... we need to check the type
     if(varName.match(regexNumber))
@@ -125,7 +130,6 @@ function checkParamType(varName)
     }else{
       var message = String.format(errors['UNDECLARED_VARIABLE'], varName);
       printToShell(message, true);
-      return;
     }
   }
   return [type, address];
