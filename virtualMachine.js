@@ -64,8 +64,11 @@ function readMemIndex(index)
     case MemOffset.BOOL:
       value = activeMemory.bools[index-offset];
       break;
-    case Type.STRING:
+    case MemOffset.STRING:
       value = activeMemory.strings[index-offset];
+      break;
+    case MemOffset.CONST:
+      value = constants[index];
       break;
   }
   return value;
@@ -177,7 +180,7 @@ function executeQuadruple(quadruple)
   }
 }
 
-function runQuadruples(quadruples)
+function runQuadruples()
 {
   for(var i = 0; i < quadruples.length; i++)
   {
