@@ -107,7 +107,7 @@ function checkInputType(input, type)
     case Type.NUMBER:
       if(input.match(regexNumber))
         {
-          value = parseInt(input);
+          value = Number(input);
           correct = true;
         }
       break;

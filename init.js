@@ -118,7 +118,8 @@ function checkParamType(varName)
     if(varName.match(regexNumber))
     {
       type = Type.NUMBER;
-      address = addConstant(varName, type);
+      var value = Number(varName);
+      address = addConstant(value, type);
     }else if(varName.match(regexString))
     {
       type = Type.STRING;
@@ -126,7 +127,8 @@ function checkParamType(varName)
     }else if(varName.match(regexBoolean))
     {
       type = Type.BOOL;
-      aaddress = addConstant(varName, type);
+      var value = input == 'true';
+      address = addConstant(value, type);
     }else{
       var message = String.format(errors['UNDECLARED_VARIABLE'], varName);
       printToShell(message, true);
