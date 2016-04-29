@@ -177,6 +177,20 @@ function executeQuadruple(quadruple)
       break;
     case Operation.RTRN: // [RTRN, var, , ]
       break;
+    case Operation.PW:
+      break;
+    case Operation.DRAW:
+      break;
+    case Operation.POINT:
+      break;
+    case Operation.LINE:
+      break;
+    case Operation.POLYGON:
+      break;
+    case Operation.CIRCLE:
+      break;
+    case Operation.RECTANGLE:
+      break;
   }
 }
 

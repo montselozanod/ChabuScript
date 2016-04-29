@@ -25,7 +25,7 @@ function setBackground()
   canvas.style.backgroundColor = 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')';
 }
 
-function drawLine(point1, point2)
+function drawLine()
 {
 
 }
