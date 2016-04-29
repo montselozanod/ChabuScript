@@ -213,8 +213,8 @@ function executeQuadruple(quadruple)
     case Operation.RECTANGLE:
       var rWidth = readMemIndex(quadruple[1]);
       var rHeight = readMemIndex(quadruple[2]);
-      rectangle[width] = rWidth;
-      rectangle[height] = rHeight;
+      rectangle['width'] = rWidth;
+      rectangle['height'] = rHeight;
       break;
     //FUNCTIONS
     case Operation.RET:

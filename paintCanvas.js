@@ -29,7 +29,7 @@ function drawLine(pWidth)
 {
   var point2 = stackPoints.pop();
   var point1 = stackPoints.pop();
-  var params = { "stroke-width": pWidth };
+  var params = {fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', "stroke-width": pWidth };
   var path = this.paper.path(Raphael.format("M{0},{1}L{2},{3}",
       point1[0], point1[1], point2[0], point2[1])).attr(params);
   line = {};
@@ -45,6 +45,10 @@ function drawCircle(pWidth)
 
 function drawRectangle(pWidth)
 {
+  var point = stackPoints.pop();
+  var params = {fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', "stroke-width": pWidth };
+  var rect = paper.rect(point[0], point[1], rectangle['width'], rectangle['height']);
+  rect.attr(params);
   rectangle = {};
 }
 
