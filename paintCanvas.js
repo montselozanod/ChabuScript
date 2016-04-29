@@ -25,24 +25,30 @@ function setBackground()
   canvas.style.backgroundColor = 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')';
 }
 
-function drawLine()
+function drawLine(pWidth)
 {
+  var point2 = stackPoints.pop();
+  var point1 = stackPoints.pop();
 
+  line = {};
 }
 
-function drawCircle(radius, point)
+function drawCircle(pWidth)
 {
-
+  var point = stackPoints.pop();
+  var c = paper.circle(point[0], point[1], circle['radius']);
+  c.attr({fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', stroke: "None"});
+  circle = {};
 }
 
-function drawRectangle(width, height)
+function drawRectangle(pWidth)
 {
-
+  rectangle = {};
 }
 
-function drawPolygon(points)
+function drawPolygon(pWidth)
 {
-
+  polygon = {};
 }
 
 function generateRandom(min, max)

@@ -17,7 +17,12 @@ var activeMemory = {
   tempBools: [],
 };
 
-var stackColor = [];
+var line = {};
+var rectangle = {};
+var circle = {};
+var polygon = {};
+
+var stackPoints = [];
 
 function writeToMemIndex(element, index)
 {
@@ -175,21 +180,69 @@ function executeQuadruple(quadruple)
     case Operation.BCK: //(BCK, COLOR, , )
       setBackground();
       break;
-    case Operation.RTRN: // [RTRN, var, , ]
-      break;
-    case Operation.PW:
-      break;
-    case Operation.DRAW:
+    case Operation.DRAW: //(DRAW, SHAPE, WIDTH, null)
+      var pWidth = readMemIndex(quadruple[2]);
+      switch(quadruple[1])
+      {
+        case Operation.LINE:
+          drawLine(pWidth);
+          break;
+        case Operation.CIRCLE:
+          drawCircle(pWidth);
+          break;
+        case Operation.RECTANGLE:
+          drawRectangle(pWidth);
+          break;
+        case Operation.POLYGON:
+          drawPolygon(pWidth);
+          break;
+      }
       break;
     case Operation.POINT:
-      break;
-    case Operation.LINE:
+      var x = readMemIndex(quadruple[1]);
+      var y = readMemIndex(quadruple[2]);
+      stackPoints.push([x, y]);
       break;
     case Operation.POLYGON:
+
       break;
     case Operation.CIRCLE:
+      var radio = readMemIndex(quadruple[1]);
+      circle['radius'] = radio;
       break;
     case Operation.RECTANGLE:
+      var rWidth = readMemIndex(quadruple[1]);
+      var rHeight = readMemIndex(quadruple[2]);
+      rectangle[width] = rWidth;
+      rectangle[height] = rHeight;
+      break;
+    //FUNCTIONS
+    case Operation.RET:
+      break;
+    case Operation.RTRN: // [RTRN, var, , ]
+      break;
+    case Operation.END:
+      break;
+    case Operation.GOTOF:
+      break;
+    case Operation.GOTOT:
+      break;
+    case Operation.GOTO:
+      break;
+    case Operation.ERA:
+      break;
+    case Operation.GOSUB:
+      break;
+    case Operation.PARAM:
+      break;
+    //lists OPS
+    case Operation.VER:
+      break;
+    case Operation.PUT:
+      break;
+    case Operation.REMOVE:
+      break;
+    case Operation.INITPUT:
       break;
   }
 }
