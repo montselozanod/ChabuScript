@@ -170,9 +170,9 @@ function executeQuadruple(quadruple)
       var red = readMemIndex(quadruple[1]);
       var green = readMemIndex(quadruple[2]);
       var blue = readMemIndex(quadruple[3]);
+      generateColor(red, green, blue);
       break;
     case Operation.BCK: //(BCK, COLOR, , )
-      var color = readMemIndex(quadruple[1]);
       setBackground();
       break;
     case Operation.RTRN: // [RTRN, var, , ]
