@@ -1,3 +1,4 @@
+var runningQuadruple = 0;
 var MemOffset = {
   NUMBER: 1000,
   STRING: 5000,
@@ -119,67 +120,83 @@ function executeQuadruple(quadruple)
     case Operation.MULT:
       var result = readMemIndex(quadruple[1]) * readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.DIV:
       var result = readMemIndex(quadruple[1]) / readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.SUM:
       var result = readMemIndex(quadruple[1]) + readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.MINUS:
       var result = readMemIndex(quadruple[1]) - readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.AND: // (AND, VAR1 VAR2 RESULT)
       var result = readMemIndex(quadruple[1]) && readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.OR: // (OR, VAl, VAl, RES)
       var result = readMemIndex(quadruple[1]) || readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.NOT: // (NOT, VAR, , RESULT)
       var result = !(readMemIndex(quadruple[1]));
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.LESS: // (LESS, VAl, VAl, RES)
     var result = readMemIndex(quadruple[1]) < readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.GRT: // (GRt, VAl, VAl, RES)
       var result = readMemIndex(quadruple[1]) > readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.EQL: // (EQL, VAl, VAl, RES)
       var result = (readMemIndex(quadruple[1]) == readMemIndex(quadruple[2]));
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.DIFF: // (DIF, VAl, VAl, RES)
       var result = readMemIndex(quadruple[1]) != readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.ASSIGN: // (= , RESULT ,  , VAR)
       var result = readMemIndex(quadruple[1]);
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.RND: // ( RND MIN MAX RESULT)
       var result = generateRandom(readMemIndex(quadruple[1]),readMemIndex(quadruple[2]));
       writeToMemIndex(result, quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.PRINT: // (PRINT, VALUE, , )
       var result = readMemIndex(quadruple[1]);
       printToShell(result, false /* it is not an error*/);
+      runningQuadruple++;
       break;
     case Operation.COLOR: //(COLOR, R, G, B)
       var red = readMemIndex(quadruple[1]);
       var green = readMemIndex(quadruple[2]);
       var blue = readMemIndex(quadruple[3]);
       generateColor(red, green, blue);
+      runningQuadruple++;
       break;
     case Operation.BCK: //(BCK, COLOR, , )
       setBackground();
+      runningQuadruple++;
       break;
     case Operation.DRAW: //(DRAW, SHAPE, WIDTH, null)
       var pWidth = readMemIndex(quadruple[2]);
@@ -198,44 +215,64 @@ function executeQuadruple(quadruple)
           drawPolygon(pWidth);
           break;
       }
+      runningQuadruple++;
       break;
     case Operation.POINT:
       var x = readMemIndex(quadruple[1]);
       var y = readMemIndex(quadruple[2]);
       stackPoints.push([x, y]);
+      runningQuadruple++;
       break;
     case Operation.POLYGON:
-
+      runningQuadruple++;
       break;
     case Operation.CIRCLE:
       var radio = readMemIndex(quadruple[1]);
       circle['radius'] = radio;
+      runningQuadruple++;
       break;
     case Operation.RECTANGLE:
       var rWidth = readMemIndex(quadruple[1]);
       var rHeight = readMemIndex(quadruple[2]);
       rectangle['width'] = rWidth;
       rectangle['height'] = rHeight;
+      runningQuadruple++;
       break;
     //FUNCTIONS
     case Operation.RET: //delete current memory
+      var newMemory = memories.pop(); //revivir memoria dormida
+      activeMemory = newMemory;
+
       break;
     case Operation.RTRN: // [RTRN, var, , ]
+      runningQuadruple++;
       break;
     case Operation.END:
+      printToShell("End of program.", false);
+      runningQuadruple = -1;
       break;
-    case Operation.GOTOF:
+    case Operation.GOTOF: //GOTOF, address, null, quad
+      var value = readMemIndex(quadruple[1]);
+      if(!value)
+      {
+        runningQuadruple = quadruple[3];
+      }else{
+        runningQuadruple++;
+      }
       break;
     case Operation.GOTOT:
+      //TODO runningQuadruple++;
       break;
-    case Operation.GOTO:
+    case Operation.GOTO: // [GOTO, quad]
+      runningQuadruple = quadruple[1];
       break;
     case Operation.ERA:
-
+      runningQuadruple++;
       break;
     case Operation.GOSUB:
       break;
     case Operation.PARAM:
+      runningQuadruple++;
       break;
     //lists OPS
     case Operation.VER: // (VER, index, inf, sup)
@@ -245,33 +282,43 @@ function executeQuadruple(quadruple)
         var message = String.format(errors['INDEX_OUT_BOUNDS'], quadruple[1]);
         printToShell(message, true);  //indes of list is not in list range
         //TODO STOP EXECUTION
+        runningQuadruple = -1;
+      }else{
+        runningQuadruple++;
       }
       break;
     case Operation.PUT: //(PUT, valueAddress, null, result)
       var valueAddress = quadruple[1];
       var indexAddress = quadruple[3][0];
       writeToMemIndex(readMemIndex(valueAddress), indexAddress);
+      runningQuadruple++;
       break;
     case Operation.REMOVE: // (REMOVE, (index), nul, null)
       var indexAddress = quadruple[1][0];
       writeToMemIndex(null, indexAddress);
+      runningQuadruple++;
       break;
     case Operation.INITPUT: // (INITPUT, address, null, indexAddress)
       writeToMemIndex(readMemIndex(quadruple[1]), quadruple[3]);
+      runningQuadruple++;
       break;
     case Operation.SUM_INDEX: //(SUM_INDEX, address, dirBase, restulAddress)
       var index = readMemIndex(quadruple[1]);
       var indexAddress = quadruple[2] + index;
       writeToMemIndex(indexAddress, quadruple[3]);
+      runningQuadruple++;
       break;
   }
 }
 
 function runQuadruples()
 {
-  for(var i = 0; i < quadruples.length; i++)
+
+  quadruples[0][1] = dirProcs['start'][DirProcAccess.QUADINI];
+
+  while(runningQuadruple != -1)
   {
-    var quad = quadruples[i];
+    var quad = quadruples[runningQuadruple];
     executeQuadruple(quad);
   }
 }

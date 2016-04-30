@@ -54,6 +54,7 @@ function startRun()
 function initCompSyntaxTools()
 {
   quadruples = [];
+  quadruples[0] = [Operation.GOTO, null, null, null]; //first quadruple should be goint to main
   dirProcs = {};
   constMem = 45000;
   constants = {};
