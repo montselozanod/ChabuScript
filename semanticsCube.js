@@ -56,6 +56,7 @@ var Operation = {
   PUT: 34, // [op, valueAddress, null, indexAddress] => indexAddress points to the address of the value
   REMOVE: 35,
   INITPUT: 36,
+  SUM_INDEX: 37,
 
   ERR: -1,
 };

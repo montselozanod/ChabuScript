@@ -17,11 +17,12 @@ var activeMemory = {
   tempBools: [],
 };
 
+var returnInstStack = []; // pila para meter stack de intstruccion de retorno
+
 var line = {};
 var rectangle = {};
 var circle = {};
 var polygon = {};
-
 var stackPoints = [];
 
 function writeToMemIndex(element, index)
@@ -217,7 +218,7 @@ function executeQuadruple(quadruple)
       rectangle['height'] = rHeight;
       break;
     //FUNCTIONS
-    case Operation.RET:
+    case Operation.RET: //delete current memory
       break;
     case Operation.RTRN: // [RTRN, var, , ]
       break;
@@ -230,19 +231,38 @@ function executeQuadruple(quadruple)
     case Operation.GOTO:
       break;
     case Operation.ERA:
+
       break;
     case Operation.GOSUB:
       break;
     case Operation.PARAM:
       break;
     //lists OPS
-    case Operation.VER:
+    case Operation.VER: // (VER, index, inf, sup)
+      var index = readMemIndex(quadruple[1]);
+      if(index < quadruple[2] || index> quadruple[3])
+      {
+        var message = String.format(errors['INDEX_OUT_BOUNDS'], quadruple[1]);
+        printToShell(message, true);  //indes of list is not in list range
+        //TODO STOP EXECUTION
+      }
       break;
-    case Operation.PUT:
+    case Operation.PUT: //(PUT, valueAddress, null, result)
+      var valueAddress = quadruple[1];
+      var indexAddress = quadruple[3][0];
+      writeToMemIndex(readMemIndex(valueAddress), indexAddress);
       break;
-    case Operation.REMOVE:
+    case Operation.REMOVE: // (REMOVE, (index), nul, null)
+      var indexAddress = quadruple[1][0];
+      writeToMemIndex(null, indexAddress);
       break;
-    case Operation.INITPUT:
+    case Operation.INITPUT: // (INITPUT, address, null, indexAddress)
+      writeToMemIndex(readMemIndex(quadruple[1]), quadruple[3]);
+      break;
+    case Operation.SUM_INDEX: //(SUM_INDEX, address, dirBase, restulAddress)
+      var index = readMemIndex(quadruple[1]);
+      var indexAddress = quadruple[2] + index;
+      writeToMemIndex(indexAddress, quadruple[3]);
       break;
   }
 }
