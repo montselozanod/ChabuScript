@@ -57,6 +57,8 @@ var Operation = {
   REMOVE: 35,
   INITPUT: 36,
   SUM_INDEX: 37,
+  //RETORNO DE FUNCION
+  ASSIGN_FUNC: 38,
 
   ERR: -1,
 };

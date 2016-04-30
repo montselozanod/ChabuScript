@@ -18,6 +18,7 @@ var activeMemory = {
   tempBools: [],
 };
 
+var returnValueStack = [];
 var returnInstStack = []; // pila para meter stack de intstruccion de retorno
 
 var line = {};
@@ -242,9 +243,10 @@ function executeQuadruple(quadruple)
     case Operation.RET: //delete current memory
       var newMemory = memories.pop(); //revivir memoria dormida
       activeMemory = newMemory;
-
+      runningQuadruple = returnInstStack.pop(); //dir de regreso
       break;
     case Operation.RTRN: // [RTRN, var, , ]
+      returnValueStack.push(quadruple[1]);
       runningQuadruple++;
       break;
     case Operation.END:
@@ -269,9 +271,18 @@ function executeQuadruple(quadruple)
     case Operation.ERA:
       runningQuadruple++;
       break;
-    case Operation.GOSUB:
+    case Operation.GOSUB: //(gosub, dirInicio, null, null)
+      var dirRetorno = runningQuadruple + 1;
+      returnInstStack.push(dirRetorno); // direccion a la que regresar despues de terminar funcion
+      runningQuadruple = quadruple[1];
       break;
-    case Operation.PARAM:
+    case Operation.ASSIGN_FUNC:
+      var value = returnValueStack.pop();
+      writeToMemIndex(value, quadruple[3]);
+      runningQuadruple++;
+      break;
+    case Operation.PARAM: //(Param, address, null, paramNumber)
+
       runningQuadruple++;
       break;
     //lists OPS
@@ -281,7 +292,7 @@ function executeQuadruple(quadruple)
       {
         var message = String.format(errors['INDEX_OUT_BOUNDS'], quadruple[1]);
         printToShell(message, true);  //indes of list is not in list range
-        //TODO STOP EXECUTION
+        //STOP EXECUTION
         runningQuadruple = -1;
       }else{
         runningQuadruple++;
