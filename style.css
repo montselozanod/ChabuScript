@@ -38,39 +38,39 @@ header > nav {
   box-shadow: 0px 1px 0px 0px;
 }
 
-.blue {
+.blue-btn {
   background-color: #55acee;
   box-shadow: 0px 5px 0px 0px #3C93D5;
 }
 
-.blue:hover {
+.blue-btn:hover {
   background-color: #6FC6FF;
 }
 
-.green {
+.green-btn {
   background-color: #2ecc71;
   box-shadow: 0px 5px 0px 0px #15B358;
 }
 
-.green:hover {
+.green-btn:hover {
   background-color: #48E68B;
 }
 
-.yellow {
+.yellow-btn {
   background-color: #f1c40f;
   box-shadow: 0px 5px 0px 0px #D8AB00;
 }
 
-.yellow:hover {
+.yellow-btn:hover {
   background-color: #FFDE29;
 }
 
-.purple {
+.purple-btn {
   background-color: #9b59b6;
   box-shadow: 0px 5px 0px 0px #82409D;
 }
 
-.purple:hover {
+.purple-btn:hover {
   background-color: #B573D0;
 }
 
