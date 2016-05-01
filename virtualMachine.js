@@ -54,32 +54,41 @@ function writeToMemIndex(element, index)
 
 function readMemIndex(index)
 {
-  var offsetType = getOffset(index);
-  var offset = offsetType[0];
-  var type = offsetType[1];
-  var value;
-  switch(offset)
+  if(index.constructor === Array)
   {
-    case MemOffset.TMPNUM:
-      value = activeMemory.tempNums[index-offset];
-      break;
-    case MemOffset.NUMBER:
-      value = activeMemory.numbers[index-offset];
-      break;
-    case MemOffset.TMPBOOL:
-      value = activeMemory.tempBools[index-offset];
-      break;
-    case MemOffset.BOOL:
-      value = activeMemory.bools[index-offset];
-      break;
-    case MemOffset.STRING:
-      value = activeMemory.strings[index-offset];
-      break;
-    case MemOffset.CONST:
-      value = constants[index];
-      break;
+    var pointer = index[0];
+    var valueAddress = readMemIndex(pointer);
+    var value = readMemIndex(value);
+    return value;
+  }else{
+    var offsetType = getOffset(index);
+    var offset = offsetType[0];
+    var type = offsetType[1];
+    var value;
+    switch(offset)
+    {
+      case MemOffset.TMPNUM:
+        value = activeMemory.tempNums[index-offset];
+        break;
+      case MemOffset.NUMBER:
+        value = activeMemory.numbers[index-offset];
+        break;
+      case MemOffset.TMPBOOL:
+        value = activeMemory.tempBools[index-offset];
+        break;
+      case MemOffset.BOOL:
+        value = activeMemory.bools[index-offset];
+        break;
+      case MemOffset.STRING:
+        value = activeMemory.strings[index-offset];
+        break;
+      case MemOffset.CONST:
+        value = constants[index];
+        break;
+    }
+    return value;
   }
-  return value;
+
 }
 
 function getOffset(index)
@@ -154,7 +163,7 @@ function executeQuadruple(quadruple)
       runningQuadruple++;
       break;
     case Operation.LESS: // (LESS, VAl, VAl, RES)
-    var result = readMemIndex(quadruple[1]) < readMemIndex(quadruple[2]);
+      var result = readMemIndex(quadruple[1]) < readMemIndex(quadruple[2]);
       writeToMemIndex(result, quadruple[3]);
       runningQuadruple++;
       break;
@@ -262,8 +271,14 @@ function executeQuadruple(quadruple)
         runningQuadruple++;
       }
       break;
-    case Operation.GOTOT:
-      //TODO runningQuadruple++;
+    case Operation.GOTOT: //[GOTOV, BOOL, null, Quad]
+      var value = readMemIndex(quadruple[1]);
+      if(value)
+      {
+        runningQuadruple = quadruple[3];
+      }else{
+        runningQuadruple++;
+      }
       break;
     case Operation.GOTO: // [GOTO, quad]
       runningQuadruple = quadruple[1];
@@ -276,7 +291,7 @@ function executeQuadruple(quadruple)
       returnInstStack.push(dirRetorno); // direccion a la que regresar despues de terminar funcion
       runningQuadruple = quadruple[1];
       break;
-    case Operation.ASSIGN_FUNC:
+    case Operation.ASSIGN_FUNC: // (ASSIGN_FUNC, funcName, null, address)
       var value = returnValueStack.pop();
       writeToMemIndex(value, quadruple[3]);
       runningQuadruple++;
@@ -300,12 +315,12 @@ function executeQuadruple(quadruple)
       break;
     case Operation.PUT: //(PUT, valueAddress, null, result)
       var valueAddress = quadruple[1];
-      var indexAddress = quadruple[3][0];
+      var indexAddress = readMemIndex(quadruple[3][0]);
       writeToMemIndex(readMemIndex(valueAddress), indexAddress);
       runningQuadruple++;
       break;
     case Operation.REMOVE: // (REMOVE, (index), nul, null)
-      var indexAddress = quadruple[1][0];
+      var indexAddress = readMemIndex(quadruple[1][0]);
       writeToMemIndex(null, indexAddress);
       runningQuadruple++;
       break;
