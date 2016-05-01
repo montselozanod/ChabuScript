@@ -362,7 +362,7 @@ function executeQuadruple(quadruple)
 
 function runQuadruples()
 {
-
+  runningQuadruple = 0;
   quadruples[0][1] = dirProcs['start'][DirProcAccess.QUADINI];
 
   while(runningQuadruple != -1)
