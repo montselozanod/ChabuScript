@@ -62,6 +62,7 @@ function initCompSyntaxTools()
 
 function initMemVars()
 {
+  varTable = {}; //delete and renew var table
   listElements = 0;
   currentFuncName = "";
   paramNumber = 0;
