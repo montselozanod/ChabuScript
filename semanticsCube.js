@@ -42,24 +42,25 @@ var Operation = {
   ERA: 22,
   GOSUB: 23,
   PARAM: 24,
+  PAR_ASSIGN:25
   // DRAWING
-  COLOR: 25,
-  LINE: 26,
-  CIRCLE: 27,
-  RECTANGLE: 28,
-  POLYGON: 29,
-  POINT: 30,
-  PW: 31,
-  DRAW: 32,
+  COLOR: 26,
+  LINE: 27,
+  CIRCLE: 28,
+  RECTANGLE: 29,
+  POLYGON: 30,
+  POINT: 31,
+  PW: 32,
+  DRAW: 33,
   // Arrays
-  VER: 33,//verificar que index este dentro del rango
-  PUT: 34, // [op, valueAddress, null, indexAddress] => indexAddress points to the address of the value
-  REMOVE: 35,
-  INITPUT: 36,
-  SUM_INDEX: 37,
-  GET: 38,
+  VER: 34,//verificar que index este dentro del rango
+  PUT: 35, // [op, valueAddress, null, indexAddress] => indexAddress points to the address of the value
+  REMOVE: 36,
+  INITPUT: 37,
+  SUM_INDEX: 38,
+  GET: 39,
   //RETORNO DE FUNCION
-  ASSIGN_FUNC: 39,
+  ASSIGN_FUNC: 40,
 
   ERR: -1,
 };

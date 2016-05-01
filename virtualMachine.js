@@ -18,6 +18,7 @@ var activeMemory = {
   tempBools: [],
 };
 
+var futureMemory;
 var returnValueStack = [];
 var returnInstStack = []; // pila para meter stack de intstruccion de retorno
 
@@ -26,6 +27,18 @@ var rectangle = {};
 var circle = {};
 var polygon = {};
 var stackPoints = [];
+
+function createNewMemory()
+{
+  var mem = {
+    numbers: [],
+    bools: [],
+    strings: [],
+    tempNums: [],
+    tempBools: [],
+  };
+  return mem;
+}
 
 function writeToMemIndex(element, index)
 {
@@ -284,12 +297,15 @@ function executeQuadruple(quadruple)
       runningQuadruple = quadruple[1];
       break;
     case Operation.ERA:
+      futureMemory = createNewMemory();
       runningQuadruple++;
       break;
     case Operation.GOSUB: //(gosub, dirInicio, null, null)
       var dirRetorno = runningQuadruple + 1;
       returnInstStack.push(dirRetorno); // direccion a la que regresar despues de terminar funcion
-      runningQuadruple = quadruple[1];
+      memories.push(activeMemory); //dormir memoria actual
+      activeMemory = futureMemory; //ahora memoria actual es la recientemente creada
+      runningQuadruple = quadruple[1]; //saltar al dirInicio de subrutina
       break;
     case Operation.ASSIGN_FUNC: // (ASSIGN_FUNC, funcName, null, address)
       var value = returnValueStack.pop();
