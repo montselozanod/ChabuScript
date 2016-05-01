@@ -11,6 +11,7 @@
   <script src="paintCanvas.js"></script>
   <script src="helper.js"></script>
   <script src="virtualMachine.js"></script>
+  <script src="blockly/appengine/storage.js"></script>
   <script src="blockly/blockly_compressed.js"></script>
   <script src="blockly/blocks_compressed.js"></script>
   <script src="blockly/chabuscript_compressed.js"></script>
@@ -28,10 +29,20 @@
   </style>
 </head>
 <body>
-  <h1>Chabuscript</h1>
-  <button id="button_run" onclick="run_code()">
-  		Run Code
-  </button>
+  <header class="main-header">
+    <nav id="left-header">
+      <div style="margin: 10px">
+      <img src="chab-logo.png" alt="Chabuscript" height="42" width="42"/>
+      Chabuscript
+    </div>
+    </nav>
+    <div id="buttons">
+      <a href="#" onclick="run_code()" class="btn red">Run Program</a>
+      <a href="#" class="btn green">Save Code</a>
+      <a href="#" class="btn blue">Load Code</a>
+      <a href="#" class="btn purple">Save Canvas</a>
+    </div>
+  </header>
   <div id="blocklyDiv" style="height: 650px; width: 700px;"></div>
 
   <div id="codeOutput">
