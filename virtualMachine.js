@@ -9,7 +9,7 @@ var MemOffset = {
 };
 
 var memories = [];
-
+var paramStack = [];
 var activeMemory = {
   numbers: [],
   bools: [],
@@ -298,6 +298,7 @@ function executeQuadruple(quadruple)
       break;
     case Operation.ERA:
       futureMemory = createNewMemory();
+      paramStack = []; //renew param stack
       runningQuadruple++;
       break;
     case Operation.GOSUB: //(gosub, dirInicio, null, null)
@@ -313,7 +314,13 @@ function executeQuadruple(quadruple)
       runningQuadruple++;
       break;
     case Operation.PARAM: //(Param, address, null, paramNumber)
-
+      var valueAdd = quadruple[1];
+      paramStack.unshift(readMemIndex(valueAdd)); //treat array as queue, to retrieve data in order
+      runningQuadruple++;
+      break;
+    case Operation.PAR_ASSIGN: //(PAR_ASSIGN, address, null, null)
+      var value = paramStack.pop();
+      writeToMemIndex(value, quadruple[1]);
       runningQuadruple++;
       break;
     //lists OPS

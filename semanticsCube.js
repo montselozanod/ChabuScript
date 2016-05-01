@@ -42,7 +42,7 @@ var Operation = {
   ERA: 22,
   GOSUB: 23,
   PARAM: 24,
-  PAR_ASSIGN:25
+  PAR_ASSIGN:25,
   // DRAWING
   COLOR: 26,
   LINE: 27,
