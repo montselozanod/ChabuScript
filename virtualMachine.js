@@ -268,7 +268,7 @@ function executeQuadruple(quadruple)
       runningQuadruple = returnInstStack.pop(); //dir de regreso
       break;
     case Operation.RTRN: // [RTRN, var, , ]
-      returnValueStack.push(quadruple[1]);
+      returnValueStack.push(readMemIndex(quadruple[1]));
       runningQuadruple++;
       break;
     case Operation.END:
