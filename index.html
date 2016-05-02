@@ -121,15 +121,39 @@
   <div id="myModal" class="modal">
     <!-- Modal content -->
     <div id="modal-content" class="modal-content">
+      <input type="file" id="input"/>
       <span class="close">×</span>
     </div>
 
   </div>
 
   <script>
+    var workspace = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')}); //workspace
+
     var modal = document.getElementById('myModal');
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
+
+    //add event listener
+    document.getElementById("input").addEventListener('change', readSingleFile, false);
+
+    function readSingleFile(evt)
+    {
+      var file = evt.target.files[0];
+
+      if(file)
+      {
+        var reader = new FileReader();
+              reader.onload = function(e) {
+        	      var contents = e.target.result;
+                BlocklyStorage.loadXml_(contents, workspace);
+              }
+              reader.readAsText(file);
+      }else{
+        alert("Could not load file");
+      }
+    }
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
@@ -142,9 +166,6 @@
             modal.style.display = "none";
         }
     }
-    
-    var workspace = Blockly.inject('blocklyDiv',
-        {toolbox: document.getElementById('toolbox')});
 
     function display()
     {
@@ -159,10 +180,6 @@
 
     function upload_code()
     {
-      var x = document.createElement("INPUT");
-      x.setAttribute("type", "file");
-      var content = document.getElementById('modal-content');
-      content.appendChild(x);
       modal.style.display = "block";
     }
 
