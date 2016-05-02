@@ -293,8 +293,8 @@ function executeQuadruple(quadruple)
         runningQuadruple++;
       }
       break;
-    case Operation.GOTO: // [GOTO, quad]
-      runningQuadruple = quadruple[1];
+    case Operation.GOTO: // [GOTO, null, null quad]
+      runningQuadruple = quadruple[3];
       break;
     case Operation.ERA:
       futureMemory = createNewMemory();
@@ -363,7 +363,7 @@ function executeQuadruple(quadruple)
 function runQuadruples()
 {
   runningQuadruple = 0;
-  quadruples[0][1] = dirProcs['start'][DirProcAccess.QUADINI];
+  quadruples[0][3] = dirProcs['start'][DirProcAccess.QUADINI];
 
   while(runningQuadruple != -1)
   {
