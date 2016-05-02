@@ -40,6 +40,7 @@
       <a href="#" onclick="run_code()" class="btn green-btn" >Run Program</a>
       <a href="#" onclick="save_code()" class="btn blue-btn" >Save Code</a>
       <a href="#" class="btn purple-btn">Load Code</a>
+      <a href="#" onclick="display()" class="btn orange-btn">Display</a>
       <a href="#" class="btn yellow-btn" >Save Canvas</a>
     </div>
   </header>
@@ -121,9 +122,33 @@
     var workspace = Blockly.inject('blocklyDiv',
         {toolbox: document.getElementById('toolbox')});
 
-    function save_code(){
+    function display()
+    {
 
     }
+
+    function save_code(){
+      var data = BlocklyStorage.save();
+      var fileName = prompt("Please enter file name:");
+      download(fileName, data);
+    }
+
+    function download(filename, text) {
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      pom.setAttribute('download', filename);
+
+      if (document.createEvent) {
+          var event = document.createEvent('MouseEvents');
+          event.initEvent('click', true, true);
+          pom.dispatchEvent(event);
+      }
+      else {
+          pom.click();
+      }
+    }
+
+
     function run_code() {
     			startRun();
     			Blockly.Chabuscript.INFINITE_LOOP_TRAP = null;

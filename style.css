@@ -74,6 +74,15 @@ header > nav {
   background-color: #B573D0;
 }
 
+.orange-btn {
+  background-color: #e67e22;
+  box-shadow: 0px 5px 0px 0px #CD6509;
+}
+
+.orange-btn:hover {
+  background-color: #FF983C;
+}
+
 #controllers > button:hover {
 		background-color: #212121;
 		cursor: pointer;
