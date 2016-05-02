@@ -71,7 +71,7 @@ function readMemIndex(index)
   {
     var pointer = index[0];
     var valueAddress = readMemIndex(pointer);
-    var value = readMemIndex(value);
+    var value = readMemIndex(valueAddress);
     return value;
   }else{
     var offsetType = getOffset(index);
