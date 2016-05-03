@@ -62,9 +62,8 @@ var Operation = {
   //RETORNO DE FUNCION
   ASSIGN_FUNC: 40,
   //ANIMATIONS
-  DELAY: 41,
+  ANIMATE: 41,
   CLEAR: 42,
-  MOVE: 43,
 
   ERR: -1,
 };

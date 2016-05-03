@@ -3,6 +3,7 @@ var width = canvas.offsetWidth - 30;
 var height = canvas.offsetHeight - 30;
 var paintColor = [];
 var paper = Raphael("canvas", width, height);; //canvas to paint
+var animObj = {};
 function initCanvas()
 {
 
@@ -16,6 +17,15 @@ function generateColor(red, green, blue)
   paintColor[0] = red;
   paintColor[1] = green;
   paintColor[2] = blue;
+}
+
+function generateAnim(type, size)
+{
+  animObj['type'] = type;
+  animObj['size'] = size;
+  animObj['red'] = paintColor[0];
+  animObj['green'] = paintColor[1];
+  animObj['blue'] = paintColor[2];
 }
 
 function cleanCanvas()
@@ -43,6 +53,14 @@ function drawCircle(pWidth)
   var point = stackPoints.pop();
   var c = paper.circle(point[0], point[1], circle['radius']);
   c.attr({fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', stroke: "None", 'stroke-width': pWidth});
+
+  if(Object.keys(animObj).length > 0)
+  {
+      //there is an animation
+      var anim = Raphael.animation({r:animObj['size'], fill: 'rgb(' + [animObj['red'],animObj['green'],animObj['blue']].join(',') + ')'}, 1000, animObj['type']);
+      c.animate(anim.repeat(Infinity));
+      animObj = {};
+  }
   circle = {};
 }
 

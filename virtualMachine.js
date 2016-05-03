@@ -8,6 +8,7 @@ var MemOffset = {
   CONST: 45000
 };
 
+var animArr = [];
 var memories = [];
 var paramStack = [];
 var activeMemory = {
@@ -365,12 +366,9 @@ function executeQuadruple(quadruple)
       cleanCanvas();
       runningQuadruple++;
       break;
-    case Operation.DELAY: // (DELAY, address, null, null)
-      var delayVal = readMemIndex(quadruple[1]);
-      sleep(delayVal);
-      runningQuadruple++;
-      break;
-    case Operation.MOVE:
+    case Operation.ANIMATE: //(anim, type, size..address, null)
+      var size = readMemIndex(quadruple[2]);
+      generateAnim(quadruple[1], size);
       runningQuadruple++;
       break;
   }
