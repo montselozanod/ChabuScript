@@ -6,8 +6,6 @@ var paper = Raphael("canvas", width, height); //canvas to paint
 var animObj = {};
 function initCanvas()
 {
-
-
   canvas.style.backgroundColor = "white";
   paper.clear();
 }
