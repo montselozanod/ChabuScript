@@ -70,6 +70,14 @@ function drawRectangle(pWidth)
   var params = {fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', "stroke-width": pWidth };
   var rect = paper.rect(point[0], point[1], rectangle['width'], rectangle['height']);
   rect.attr(params);
+
+  if(Object.keys(animObj).length > 0)
+  {
+      //there is an animation
+      var anim = Raphael.animation({width:animObj['size'], height:animObj['size'], fill: 'rgb(' + [animObj['red'],animObj['green'],animObj['blue']].join(',') + ')'}, 1000, animObj['type']);
+      rect.animate(anim.repeat(Infinity));
+      animObj = {};
+  }
   rectangle = {};
 }
 
