@@ -108,17 +108,17 @@ function readMemIndex(index)
 function getOffset(index)
 {
   // number
-  if(index >=  MemOffset.NUMBER && index < MemOffset.BOOL)
+  if(index >=  MemOffset.NUMBER && index < MemOffset.STRING)
   {
     return [MemOffset.NUMBER, Type.NUMBER];
 
-  }else if (index >=  MemOffset.BOOL && index < MemOffset.STRING)
+  }else if (index >=  MemOffset.STRING && index < MemOffset.BOOL)
   {
     //bool
-    return [MemOffset.BOOL, Type.BOOL];
-  }else if(index >=  MemOffset.STRING && index < MemOffset.TMPNUM){
-    // string
     return [MemOffset.STRING, Type.STRING];
+  }else if(index >=  MemOffset.BOOL && index < MemOffset.TMPNUM){
+    // string
+    return [MemOffset.BOOL, Type.BOOL];
   }else if(index >=  MemOffset.TMPNUM && index < MemOffset.TMPBOOL)
   {
     //number temp
