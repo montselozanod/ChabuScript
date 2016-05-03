@@ -61,6 +61,9 @@ var Operation = {
   GET: 39,
   //RETORNO DE FUNCION
   ASSIGN_FUNC: 40,
+  //ANIMATIONS
+  ANIMATE: 41,
+  CLEAR: 42,
 
   ERR: -1,
 };

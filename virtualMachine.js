@@ -8,6 +8,7 @@ var MemOffset = {
   CONST: 45000
 };
 
+var animArr = [];
 var memories = [];
 var paramStack = [];
 var activeMemory = {
@@ -107,17 +108,17 @@ function readMemIndex(index)
 function getOffset(index)
 {
   // number
-  if(index >=  MemOffset.NUMBER && index < MemOffset.BOOL)
+  if(index >=  MemOffset.NUMBER && index < MemOffset.STRING)
   {
     return [MemOffset.NUMBER, Type.NUMBER];
 
-  }else if (index >=  MemOffset.BOOL && index < MemOffset.STRING)
+  }else if (index >=  MemOffset.STRING && index < MemOffset.BOOL)
   {
     //bool
-    return [MemOffset.BOOL, Type.BOOL];
-  }else if(index >=  MemOffset.STRING && index < MemOffset.TMPNUM){
-    // string
     return [MemOffset.STRING, Type.STRING];
+  }else if(index >=  MemOffset.BOOL && index < MemOffset.TMPNUM){
+    // string
+    return [MemOffset.BOOL, Type.BOOL];
   }else if(index >=  MemOffset.TMPNUM && index < MemOffset.TMPBOOL)
   {
     //number temp
@@ -362,6 +363,15 @@ function executeQuadruple(quadruple)
       var index = readMemIndex(quadruple[1]);
       var indexAddress = quadruple[2] + index;
       writeToMemIndex(indexAddress, quadruple[3]);
+      runningQuadruple++;
+      break;
+    case Operation.CLEAR:
+      cleanCanvas();
+      runningQuadruple++;
+      break;
+    case Operation.ANIMATE: //(anim, type, size..address, null)
+      var size = readMemIndex(quadruple[2]);
+      generateAnim(quadruple[1], size);
       runningQuadruple++;
       break;
   }
