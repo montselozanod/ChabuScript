@@ -16,6 +16,15 @@ header > nav {
 		position: relative;
 }
 
+#logo-div {
+	height: calc(100% - 19px);
+	margin-top: 19px;
+}
+
+#logo {
+	vertical-align: middle;
+}
+
 #buttons {
 	float: right;
   text-align: center;
@@ -88,11 +97,13 @@ header > nav {
 		cursor: pointer;
 }
 
+html, body {
+	height: 100%;
+}
 body
 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16pt;
-
 }
 p
 {
@@ -111,17 +122,16 @@ p
 }
 #blocklyDiv
 {
-	width:49%;
+	width:50%;
+	height: calc(100% - 80px);
 	float:left;
 	overflow: hidden;
 	margin: 0;
 }
 
-
-
 #codeOutput
 {
-	height: 600px;
+	height: calc(100% - 80px);
 	width: 50%;
 	display: inline-block;
 	position: relative;
@@ -133,8 +143,19 @@ p
 
 #canvas{
 	background: #FFF;
-	height: 400px;
+	height: 50%;
 	border: 15px solid #A56A10;
+}
+
+#console {
+	height: calc(50% - 70px);
+}
+
+.panel {
+		height: calc(100% - 30px);
+    background: #27292c;
+    padding: 20px;
+    overflow-y: scroll;
 }
 
 .header {
@@ -169,13 +190,6 @@ p
 .green {
     margin-left: 50px;
     background: #33c748;
-}
-
-.panel {
-    height: 200px;
-    background: #27292c;
-    padding: 20px;
-    overflow-y: scroll;
 }
 
 .action {
