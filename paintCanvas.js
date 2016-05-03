@@ -1,11 +1,12 @@
-var canvas;
+var canvas = document.getElementById('canvas');;
 var paintColor = [];
-var paper; //canvas to paint
+var paper = Raphael("canvas", 500, 500);; //canvas to paint
 function initCanvas()
 {
-  paper = Raphael("canvas", 500, 500);
-  canvas = document.getElementById('canvas');
+
+
   canvas.style.backgroundColor = "white";
+  paper.clear();
 }
 
 function generateColor(red, green, blue)
