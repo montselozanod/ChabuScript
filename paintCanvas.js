@@ -1,8 +1,8 @@
-var canvas = document.getElementById('canvas');;
+var canvas = document.getElementById('canvas');
 var width = canvas.offsetWidth - 30;
 var height = canvas.offsetHeight - 30;
 var paintColor = [];
-var paper = Raphael("canvas", 500, 500);; //canvas to paint
+var paper = Raphael("canvas", width, height); //canvas to paint
 var animObj = {};
 function initCanvas()
 {
