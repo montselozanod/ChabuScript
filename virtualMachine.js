@@ -246,7 +246,11 @@ function executeQuadruple(quadruple)
       stackPoints.push([x, y]);
       runningQuadruple++;
       break;
-    case Operation.POLYGON:
+    case Operation.POLYGON: // (POLYGON, NUMSIDES, SIDELENGTH, NULL)
+      var sides = readMemIndex(quadruple[1]);
+      var length = readMemIndex(quadruple[2]);
+      polygon['sides'] = sides;
+      polygon['length'] = length;
       runningQuadruple++;
       break;
     case Operation.CIRCLE:
