@@ -153,6 +153,9 @@ function executeQuadruple(quadruple)
       break;
     case Operation.SUM:
       var result = readMemIndex(quadruple[1]) + readMemIndex(quadruple[2]);
+      if (result.type == Type.STRING) {
+        result = result.slice(0, -1);
+      }
       writeToMemIndex(result, quadruple[3]);
       runningQuadruple++;
       break;
