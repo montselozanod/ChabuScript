@@ -18,7 +18,6 @@ function generateColor(red, green, blue)
 
 function cleanCanvas()
 {
-  canvas.style.backgroundColor = "white";
   paper.clear();
 }
 

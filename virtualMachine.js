@@ -363,10 +363,15 @@ function executeQuadruple(quadruple)
       break;
     case Operation.CLEAR:
       cleanCanvas();
+      runningQuadruple++;
       break;
-    case Operation.DELAY:
+    case Operation.DELAY: // (DELAY, address, null, null)
+      var delayVal = readMemIndex(quadruple[1]);
+      sleep(delayVal);
+      runningQuadruple++;
       break;
     case Operation.MOVE:
+      runningQuadruple++;
       break;
   }
 }
