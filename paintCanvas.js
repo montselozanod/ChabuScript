@@ -2,7 +2,7 @@ var canvas = document.getElementById('canvas');;
 var width = canvas.offsetWidth - 30;
 var height = canvas.offsetHeight - 30;
 var paintColor = [];
-var paper = Raphael("canvas", width, height);; //canvas to paint
+var paper = Raphael("canvas", 500, 500);; //canvas to paint
 var animObj = {};
 function initCanvas()
 {
@@ -45,6 +45,13 @@ function drawLine(pWidth)
   var params = {fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', "stroke-width": pWidth };
   var path = this.paper.path(Raphael.format("M{0},{1}L{2},{3}",
       point1[0], point1[1], point2[0], point2[1])).attr(params);
+
+  if(Object.keys(animObj).length > 0)
+  {
+      var _transformedPath = Raphael.transformPath(Raphael.format('M{0},{1}L{2},{3}',point2[0], point2[1],animObj['size'], animObj['size']), 'T400,0');
+      path.animate({path: _transformedPath, fill: 'rgb(' + [animObj['red'],animObj['green'],animObj['blue']].join(',') + ')'}, 1000);
+      animObj = {};
+  }
   line = {};
 }
 
@@ -87,6 +94,13 @@ function drawPolygon(pWidth)
 
   var pol = paper.path(drawPol(point[0], point[1], polygon['sides'], polygon['length']));
   pol.attr({fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', stroke: "None", 'stroke-width': pWidth});
+
+  if(Object.keys(animObj).length > 0)
+  {
+    var _transformedPath = Raphael.transformPath('M100 100L190 190', 'T400,0');
+    pol.animate({path: _transformedPath, fill: 'rgb(' + [animObj['red'],animObj['green'],animObj['blue']].join(',') + ')'}, 1000);
+    animObj = {};
+  }
   polygon = {};
 }
 

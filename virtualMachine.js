@@ -60,7 +60,7 @@ function writeToMemIndex(element, index)
     case MemOffset.BOOL:
       activeMemory.bools[index-offset] = element;
       break;
-    case Type.STRING:
+    case MemOffset.STRING:
       activeMemory.strings[index-offset] = element;
       break;
   }
