@@ -58,7 +58,8 @@ function drawPolygon(pWidth)
 {
   var point = stackPoints.pop();
 
-  paper.path(drawPol(point[0], point[1], polygon['sides'], polygon['length']));
+  var pol = paper.path(drawPol(point[0], point[1], polygon['sides'], polygon['length']));
+  pol.attr({fill: 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')', stroke: "None", 'stroke-width': pWidth});
   polygon = {};
 }
 
