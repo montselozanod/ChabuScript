@@ -361,6 +361,13 @@ function executeQuadruple(quadruple)
       writeToMemIndex(indexAddress, quadruple[3]);
       runningQuadruple++;
       break;
+    case Operation.CLEAR:
+      cleanCanvas();
+      break;
+    case Operation.DELAY:
+      break;
+    case Operation.MOVE:
+      break;
   }
 }
 
