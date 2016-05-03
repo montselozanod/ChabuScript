@@ -207,7 +207,28 @@
 
     function save_img()
     {
+      document.getElementsByTagName('svg')[0].id = "svg_program";
 
+      //serialize svg
+      var svgElement = document.body.getElementsByTagName("svg")[1];
+      var svgXml = (new XMLSerializer()).serializeToString(svgElement);
+
+      var image = new Image();
+      image.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgXml)));
+
+      image.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        var context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+
+        var a = document.createElement('a');
+        a.download = "image.png";
+        a.href = canvas.toDataURL('image/png');
+        document.body.appendChild(a);
+        a.click();
+      }
     }
 
     function run_code() {
