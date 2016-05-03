@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Chabuscript</title>
+  <title>ChabuScript</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
   <script src="raphael.min.js"></script>
   <script src="init.js"></script>
@@ -30,20 +30,19 @@
 <body>
   <header class="main-header">
     <nav id="left-header">
-      <div style="margin: 10px">
-      <img src="chab-logo.png" alt="Chabuscript" height="42" width="42"/>
-      Chabuscript
-    </div>
+      <div id="logo-div">
+        <img id="logo" src="chab-logo.png" alt="ChabuScript" height="42" width="42"/>
+        ChabuScript
+      </div>
     </nav>
     <div id="buttons">
       <a href="#" onclick="run_code()" class="btn green-btn" >Run Program</a>
       <a href="#" onclick="save_code()" class="btn blue-btn" >Save Code</a>
-      <a href="#" onclick="upload_code()" class="btn purple-btn">Load Code</a>
-      <a href="#" onclick="display()" class="btn orange-btn">Display</a>
+      <a href="#" onclick="upload_code()" class="btn orange-btn">Load Code</a>
       <a href="#" onclick="save_img()" class="btn yellow-btn" >Save Canvas</a>
     </div>
   </header>
-  <div id="blocklyDiv" style="height: 650px; width: 700px;"></div>
+  <div id="blocklyDiv"></div>
 
   <div id="codeOutput">
     <div id="canvas"></div>
@@ -177,11 +176,6 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
-
-    function display()
-    {
-
     }
 
     function save_code(){
