@@ -82,10 +82,11 @@ function cleanShell()
 
 function printToShell(text, error)
 {
-    var shell = document.getElementById('output');
+    var shell = document.getElementById("output");
     var element = document.createElement('li');
     //element.setAttribute("style", "list-style-type: circle");
-    element.textContent = text;
+    //element.textContent = text;
+    element.appendChild(document.createTextNode(text));
 
     if (error)
     {
@@ -93,6 +94,11 @@ function printToShell(text, error)
     }
     else {
       element.textContent = element.textContent.replace(/"/gi, '');
+    }
+
+    if (element.textContent.indexOf("End of program") > -1) {
+      element.setAttribute("style", "color:green");
+      element.setAttribute("style", "color:green");
     }
 
     shell.appendChild(element);

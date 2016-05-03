@@ -280,7 +280,7 @@ function executeQuadruple(quadruple)
       runningQuadruple++;
       break;
     case Operation.END:
-      printToShell("-- End of program --", false);
+      printToShell("End of program.", false);
       runningQuadruple = -1;
       break;
     case Operation.GOTOF: //GOTOF, address, null, quad
