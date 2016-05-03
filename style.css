@@ -149,6 +149,18 @@ p
 
 #console {
 	height: calc(50% - 70px);
+	font-family: "Courier New", Courier, monospace;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li:before {
+    color: #FFF;
+    content: '\003e	\0000a0';
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .panel {

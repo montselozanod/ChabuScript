@@ -84,11 +84,15 @@ function printToShell(text, error)
 {
     var shell = document.getElementById('output');
     var element = document.createElement('li');
+    //element.setAttribute("style", "list-style-type: circle");
     element.textContent = text;
 
     if (error)
     {
       element.className += " error";
+    }
+    else {
+      element.textContent = element.textContent.replace(/"/gi, '');
     }
 
     shell.appendChild(element);

@@ -59,7 +59,7 @@ function writeToMemIndex(element, index)
     case MemOffset.BOOL:
       activeMemory.bools[index-offset] = element;
       break;
-    case Type.STRING:
+    case MemOffset.STRING:
       activeMemory.strings[index-offset] = element;
       break;
   }
@@ -152,6 +152,9 @@ function executeQuadruple(quadruple)
       break;
     case Operation.SUM:
       var result = readMemIndex(quadruple[1]) + readMemIndex(quadruple[2]);
+      if (result.type == Type.STRING) {
+        result = result.slice(0, -1);
+      }
       writeToMemIndex(result, quadruple[3]);
       runningQuadruple++;
       break;
@@ -276,7 +279,7 @@ function executeQuadruple(quadruple)
       runningQuadruple++;
       break;
     case Operation.END:
-      printToShell("End of program.", false);
+      printToShell("-- End of program --", false);
       runningQuadruple = -1;
       break;
     case Operation.GOTOF: //GOTOF, address, null, quad
