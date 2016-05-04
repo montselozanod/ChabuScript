@@ -1,4 +1,7 @@
+// cuadruplo que actualmente se esta corriendo
 var runningQuadruple = 0;
+
+//enum con los offsets de cada tipo de direccion
 var MemOffset = {
   NUMBER: 1000,
   STRING: 5000,
@@ -8,9 +11,13 @@ var MemOffset = {
   CONST: 45000
 };
 
+//array que guarda animaciones
 var animArr = [];
+//guarda las memorias dormidas
 var memories = [];
+//stack de los parametros a asignar en una funcion
 var paramStack = [];
+//memoria activa durante execution
 var activeMemory = {
   numbers: [],
   bools: [],
@@ -18,10 +25,12 @@ var activeMemory = {
   tempNums: [],
   tempBools: [],
 };
-
+//memoria futura en llamada a funcion
 var futureMemory;
+//stack de los valores de retorno
 var returnValueStack = [];
-var returnInstStack = []; // pila para meter stack de intstruccion de retorno
+// pila para meter stack de intstruccion de retorno
+var returnInstStack = [];
 
 var line = {};
 var rectangle = {};
@@ -29,6 +38,7 @@ var circle = {};
 var polygon = {};
 var stackPoints = [];
 
+//funcion para crear una nueva memoria en ERA
 function createNewMemory()
 {
   var mem = {
@@ -41,6 +51,7 @@ function createNewMemory()
   return mem;
 }
 
+//funcion para escribir un elemento a partir de un index
 function writeToMemIndex(element, index)
 {
   var offsetType = getOffset(index);
@@ -66,8 +77,11 @@ function writeToMemIndex(element, index)
   }
 }
 
+//funcion para leer y regresar el elemento de un indice
 function readMemIndex(index)
 {
+  //verificar si indice no es un pointer
+  // y guarda dentro una direccion de memoria
   if(index.constructor === Array)
   {
     var pointer = index[0];
@@ -75,6 +89,7 @@ function readMemIndex(index)
     var value = readMemIndex(valueAddress);
     return value;
   }else{
+    //leer y regresar dato del espacio
     var offsetType = getOffset(index);
     var offset = offsetType[0];
     var type = offsetType[1];
@@ -105,6 +120,8 @@ function readMemIndex(index)
 
 }
 
+//funcion que de acuerdo a una direccion regresa una tupla con su
+// [offset, tipo de dato]
 function getOffset(index)
 {
   // number
@@ -137,6 +154,9 @@ function getOffset(index)
   }
 }
 
+//funcion que recibe como parametro un cuadruplo, y lo ejecuta
+//se utiliza un switch para saber de acuerdo al codigo de operacion en
+// quadruple[0] que instrucciones ejecutar
 function executeQuadruple(quadruple)
 {
   switch(quadruple[0])
@@ -376,12 +396,14 @@ function executeQuadruple(quadruple)
       break;
   }
 }
-
+//funcion para recorrer en los cuadruplos
 function runQuadruples()
 {
   runningQuadruple = 0;
   quadruples[0][3] = dirProcs['start'][DirProcAccess.QUADINI];
 
+  //cuando se llega a -1 significa que hubo un error execution
+  // o ya acabo el programa
   while(runningQuadruple != -1)
   {
     var quad = quadruples[runningQuadruple];

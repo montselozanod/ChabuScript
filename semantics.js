@@ -1,14 +1,17 @@
 
-var regexNumber = /^-?\d*(\.\d+)?$/;
-var regexString = /^"[^"]*"$/;
+var regexNumber = /^-?\d*(\.\d+)?$/; //expresión regular de number
+var regexString = /^"[^"]*"$/; //expresión regular de string
 //var regexBoolean = /^(true|false)$/;
-var regexBoolean = /^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])$/;
+var regexBoolean = /^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])$/;//expresión regular de boolean
 
+// Funcion para inicializar la tabla de variables nuevamente
 function initializeAgain()
 {
     varTable = {};
 }
 
+//Funcion que agrega una funcion a la tabla de procedimientos a partir de
+// un nombre, un tipo, un inicio, lista de params, y numero de variables
 //numVars = [numS, tmpNums, strings, booleans, tmpBools ]
 function addProc(name, type, quadInit, params, numVars)
 {
@@ -16,16 +19,22 @@ function addProc(name, type, quadInit, params, numVars)
   dirProcs[name] = [type, quadInit, params, numVars];
 }
 
+//Funcion que regresa la lista de parametros de una funcion en especial
 function getProcParams(name)
 {
   return dirProcs[name][2];
 }
 
+//Funcion que agrega una variable local a la table de variables a partir de su nombre
+// tipo, direccion, dimension y size
 function addLocalVar(id, type, address, dimension, size)
 {
   varTable[id] = [type, address, dimension, size];
 }
 
+//funcion que checa si una variable es unique
+// TRUE if unique
+// FALE IF NOT
 function varIsUnique(id)
 {
   //.hasOwnProperty(id)
@@ -36,16 +45,9 @@ function varIsUnique(id)
   }
 }
 
-function varExists(id)
-{
-  if(code in varTable)
-  {
-    return true;
-  }else{
-    return false;
-  }
-}
-
+//funcion que checa si una funcion es unique
+// TRUE if unique
+// FALE IF NOT
 function funcIsUnique(name)
 {
   //.hasOwnProperty(id)
@@ -56,6 +58,9 @@ function funcIsUnique(name)
   }
 }
 
+// Funcion que agrega una constante a la estructura de constantes
+// Si ya existe regresa el valor del address de la existente
+// Si no existe, lo agrega y regresa su address
 //constants[constant] = [address, type]
 //constants[address] = [constant]
 function addConstant(cons, type)
@@ -71,6 +76,9 @@ function addConstant(cons, type)
   }
 }
 
+// Valida el accesso a una lista a partir del indice, nombre y indice
+// Regresa true si el input es aceptable
+// Regresa false e imprime el error si no se puede acceder.
 function validateListAccess(index, text_index, list_name)
 {
   if(isNan(index))
@@ -98,6 +106,9 @@ function validateListAccess(index, text_index, list_name)
   }
 }
 
+//Verifica de acuerdo a expresiones regulares el input de acuerdo al tipo que se busca
+// regresa true si el input cumple con el tipo y false si no
+// La función también hace parsing del valor
 function checkInputType(input, type)
 {
   var correct = false;
