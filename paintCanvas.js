@@ -4,12 +4,16 @@ var height = canvas.offsetHeight - 30;
 var paintColor = [];
 var paper = Raphael("canvas", width, height); //canvas to paint
 var animObj = {};
+
+//Funcion para inicializar el canvas
 function initCanvas()
 {
   canvas.style.backgroundColor = "white";
   paper.clear();
 }
 
+//funcion para generar un color a partir de tres
+//parametros RGB
 function generateColor(red, green, blue)
 {
   paintColor[0] = red;
@@ -17,6 +21,8 @@ function generateColor(red, green, blue)
   paintColor[2] = blue;
 }
 
+//funcion para generar la animacion a partir de su tipo y
+//size de cambio
 function generateAnim(type, size)
 {
   animObj['type'] = type;
@@ -26,16 +32,19 @@ function generateAnim(type, size)
   animObj['blue'] = paintColor[2];
 }
 
+//funcion para limpiar canvas
 function cleanCanvas()
 {
   paper.clear();
 }
 
+//funcion para cambiar el color del background del canvas
 function setBackground()
 {
   canvas.style.backgroundColor = 'rgb(' + [paintColor[0],paintColor[1],paintColor[2]].join(',') + ')';
 }
 
+//funcion para dibujar una linea de acuerdo a una longitud de linea
 function drawLine(pWidth)
 {
   var point2 = stackPoints.pop();
@@ -53,6 +62,7 @@ function drawLine(pWidth)
   line = {};
 }
 
+//funcion para dibujar un circle de acuerdo a una longitud de linea
 function drawCircle(pWidth)
 {
   var point = stackPoints.pop();
@@ -69,6 +79,7 @@ function drawCircle(pWidth)
   circle = {};
 }
 
+//funcion para dibujar un rectangle de acuerdo a una longitud de linea
 function drawRectangle(pWidth)
 {
   var point = stackPoints.pop();
@@ -86,6 +97,7 @@ function drawRectangle(pWidth)
   rectangle = {};
 }
 
+//funcion para dibujar un polygon de acuerdo a una longitud de linea
 function drawPolygon(pWidth)
 {
   var point = stackPoints.pop();
@@ -102,27 +114,32 @@ function drawPolygon(pWidth)
   polygon = {};
 }
 
+// funcion para generar un numero random de acuerdo a un min y max numbers
+// su valor de retorno es el number random
 function generateRandom(min, max)
 {
   return Math.random() * (max - min) + min;
 }
 
+// Helper function para dibujar los paths alrededor del polygon
+// funcion helper regresa el path a construir por la funcion draw polygon
 function drawPol(xCor, yCor, N, side) {
-    // draw a dot at the center point for visual reference
     paper.circle(xCor, yCor, 3).attr("fill", "black");
 
     var path = "", n, temp_x, temp_y, angle;
 
     for (n = 0; n <= N; n += 1) {
-        // the angle (in radians) as an nth fraction of the whole circle
+        // angulo en radianes parte del circulo a dibujar
         angle = n / N * 2 * Math.PI;
 
-        // The starting x value of the point adjusted by the angle
+        // ajustar valor de x de acuerdo al angulo
         temp_x = xCor + Math.cos(angle) * side;
-        // The starting y value of the point adjusted by the angle
+        // ajustar valor de y de acuerdo al angulo
         temp_y = yCor + Math.sin(angle) * side;
 
-        // Start with "M" if it's the first point, otherwise L
+        //Empezar a escribir el path
+        // Si es el primer punto, se usa M (starting point) si no utilizar L en el formato del path
+        //Dato especificado por raphael
         path += (n === 0 ? "M" : "L") + temp_x + "," + temp_y;
     }
     return path;

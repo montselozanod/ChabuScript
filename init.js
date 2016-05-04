@@ -5,7 +5,7 @@ var dirProcs = {}; //process address directory
 // funcName : [type, quadInicio, params, numVars]
 var quadCont = 0;
 var constants = {}; // constants with there memory address
-var numVars = 0;
+var numVars = 0; //numero de variables en procdimiento
 var stringVars = 0;
 var boolVars = 0;
 var numberMem; // start memory address for numbers
@@ -14,15 +14,15 @@ var boolMem; // start memory address for bools
 var tmpNumMem; // start memory address for tmp numbers
 var tmpBoolMem; // start memory address for tmp bools
 var constMem; // start memory address for constants
-var paramNumber = 0;
-var params = [];
+var paramNumber = 0; //numero de parametros encontrados
+var params = []; // arreglo con tipo de parametros
 var currentFuncName = "";
-var pOper = [];
+var pOper = []; //pila de operaciones
 var listElements = 0;
-var pSaltos = [];
-var pilaO = [];
-var pOper = [];
+var pSaltos = []; // pila de saltos
+var pilaO = []; //pila de operandos
 
+// objeto diccionario con los tipos de errores que se imprimen
 var errors = {
   'PARAMETER_TYPE_MISMATCH': 'Function {0} expects type {1} and received type {2} in position {3}',
   'PARAMETER_LENGTH_MISMATCH': 'Function {0} expects {1} parameters and is invoked with {2}',
@@ -41,6 +41,9 @@ var errors = {
   'SYNTAX_ERROR': 'Syntax error: expecting a {0} block',
 };
 
+//funcion para empezar a compilar
+//Dicha funcion inicializa el canvas, las variables de memoria
+//y las escructuras para la compilacion y la verificacion de la sintaxis
 function startRun()
 {
   initCompSyntaxTools();
@@ -51,6 +54,9 @@ function startRun()
   cleanCanvas();
 }
 
+//Funcion que inicializa los cuadruplos, crea el directorio de procedimientos
+// y crea el primero cuadruplo del GOTO, que despues sera rellenado con el numero
+// del cuadruplo del main
 function initCompSyntaxTools()
 {
   quadruples = [];
@@ -60,6 +66,7 @@ function initCompSyntaxTools()
   constants = {};
 }
 
+// Inicializa las variables de memoria
 function initMemVars()
 {
   params = [];
@@ -74,12 +81,17 @@ function initMemVars()
   tmpBoolMem = 20000;
 }
 
+// Funcion que limpia la shell (consola) para inicializarla sin mensajes
 function cleanShell()
 {
   var shell = document.getElementById('output');
   shell.innerHTML = '';
 }
 
+//Funcion para imprimir a consola
+//Funcion que recibe como parametros el texto a imprimir y una flag de error
+// si error es true se le agregar al class name de error para ser impreso el mensaje
+// como un error
 function printToShell(text, error)
 {
     var shell = document.getElementById("output");
@@ -117,6 +129,9 @@ if (!String.format) {
   };
 }
 
+//Funcion que de acuerdo a un input de parametro,
+//verifica si dicho input es una variable, una constante number, string o booleana
+// la funcion regresa una tupla del siguiente tipo: [tipo de dato, direccion virtual]
 function checkParamType(varName)
 {
   //return [type, address]
@@ -150,6 +165,8 @@ function checkParamType(varName)
   return [type, address];
 }
 
+//Funcion para checar el tipo de dato de la lista (variables no atómicas)
+// la funcion regresa el tipo de la lista
 function checkListType(drop_type)
 {
   var type;
@@ -168,6 +185,11 @@ function checkListType(drop_type)
   return type;
 }
 
+//Funcion que de acuerdo a un tipo de dato, le suma
+// al contador de direcciones virtuales de memoria de ese tipo
+// una cantidad.
+// Dicha funcion es utilizada para sumar la traslacion de los arreglos
+// para ver cual seria la direccion del siguiente dato del mismo tipo.
 function sumAddress(type, sum)
 {
   var startAddress;
